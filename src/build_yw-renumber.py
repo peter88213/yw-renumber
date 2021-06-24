@@ -1,12 +1,12 @@
-""" Build a python script for the yw-reporter distribution.
+""" Build a python script for the yw-renumber distribution.
         
 In order to distribute a single script without dependencies, 
 this script "inlines" all modules imported from the pywriter package.
 
 The PyWriter project (see see https://github.com/peter88213/PyWriter)
-must be located on the same directory level as the yw-reporter project. 
+must be located on the same directory level as the yw-renumber project. 
 
-For further information see https://github.com/peter88213/yw-reporter
+For further information see https://github.com/peter88213/yw-renumber
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
@@ -14,8 +14,8 @@ import inliner
 
 SRC = '../src/'
 BUILD = '../test/'
-SOURCE_FILE_GUI = 'yw-reporter.pyw'
-TARGET_FILE_GUI = BUILD + 'yw-reporter.pyw'
+SOURCE_FILE_GUI = 'yw-renumber.pyw'
+TARGET_FILE_GUI = BUILD + 'yw-renumber.pyw'
 
 
 def main():
@@ -34,7 +34,7 @@ def main():
         pass
 
     inliner.run(SOURCE_FILE_GUI,
-                TARGET_FILE_GUI, 'ywreporter', '../src/')
+                TARGET_FILE_GUI, 'ywrenumber', '../src/')
     inliner.run(TARGET_FILE_GUI,
                 TARGET_FILE_GUI, 'pywriter', '../../PyWriter/src/')
     print('Done.')

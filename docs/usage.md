@@ -1,8 +1,8 @@
-[Project homepage](https://peter88213.github.io/yw-reporter)
+[Project homepage](https://peter88213.github.io/yw-renumber)
 
 --- 
 
-The *yw-reporter* Python script creates configurable reports from yWriter projects.
+The *yw-renumber* Python script creates configurable reports from yWriter projects.
 
 ## Usage
 
@@ -65,6 +65,6 @@ The latest yWriter project selected and the latest options are saved in a config
 
 In Windows, this is the file path: 
 
-`c:\Users\<user name>\AppData\Roaming\yw-reporter\yw-reporter.ini`
+`c:\Users\<user name>\AppData\Roaming\yw-renumber\yw-renumber.ini`
 
 You can safely delete this file at any time.
