@@ -1,0 +1,85 @@
+"""Provide a HTML report generator class for yWriter projects. 
+
+Copyright (c) 2021 Peter Triesberger
+For further information see https://github.com/peter88213/yw-reporter
+Published under the MIT License (https://opensource.org/licenses/mit-license.php)
+"""
+import os
+
+from pywriter.yw.yw7_file import Yw7File
+
+
+class YwRn():
+    """Renumber chapters."""
+
+    def __init__(self):
+        """Define instance variables."""
+        self.ui = None
+
+    def run(self, sourcePath, **kwargs):
+
+        TENS = {30: 'thirty', 40: 'forty', 50: 'fifty',
+                60: 'sixty', 70: 'seventy', 80: 'eighty', 90: 'ninety'}
+        ZERO_TO_TWENTY = (
+            'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+            'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'
+        )
+
+        def number_to_english(n):
+            if any(not x.isdigit() for x in str(n)):
+                return ''
+
+            if n <= 20:
+                return ZERO_TO_TWENTY[n]
+            elif n < 100 and n % 10 == 0:
+                return TENS[n]
+            elif n < 100:
+                return number_to_english(n - (n % 10)) + ' ' + number_to_english(n % 10)
+            elif n < 1000 and n % 100 == 0:
+                return number_to_english(n / 100) + ' hundred'
+            elif n < 1000:
+                return number_to_english(n / 100) + ' hundred ' + number_to_english(n % 100)
+            elif n < 1000000:
+                return number_to_english(n / 1000) + ' thousand ' + number_to_english(n % 1000)
+
+            return ''
+
+        self.newFile = None
+
+        fileName, fileExtension = os.path.splitext(sourcePath)
+
+        if not fileExtension == Yw7File.EXTENSION:
+            self.ui.set_info_how(
+                'ERROR: File "' + os.path.normpath(sourcePath) + '" is not a yWriter 7 project.')
+            return
+
+        if not os.path.isfile(sourcePath):
+            self.ui.set_info_how(
+                'ERROR: File "' + os.path.normpath(sourcePath) + '" not found.')
+            return
+
+        source = Yw7File(sourcePath, **kwargs)
+
+        message = source.read()
+
+        if message.startswith('ERROR'):
+            self.ui.set_info_how(message)
+            return
+
+        i = 0
+
+        for chId in source.srtChapters:
+
+            if source.chapters[chId].isUnused:
+                continue
+
+            if source.chapters[chId].isTrash:
+                continue
+
+            if source.chapters[chId].chType == 0:
+                i += 1
+                source.chapters[chId].title = number_to_english(i)
+
+        message = source.write()
+        self.ui.set_info_how(message)
+        return
