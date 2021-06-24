@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>yw-renumber-chapters</name>
+	<name>yw-renumber</name>
 	<comment></comment>
 	<projects>
 		<project>PyWriter</project>
