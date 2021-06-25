@@ -133,7 +133,7 @@ class YwRn():
                 if kwargs['case'] == 0:
                     number = number.upper()
 
-                elif kwargs['case'] == 2:
+                elif kwargs['case'] == 1:
                     number = number.capitalize()
 
                 source.chapters[chId].title = kwargs['prefix'] + \

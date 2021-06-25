@@ -2,7 +2,7 @@
 
 --- 
 
-The *yw-renumber* Python script creates configurable reports from yWriter projects.
+The *yw-renumber* Python script rewrites chapter titles in yWriter 7 projects.
 
 ## Usage
 
@@ -13,50 +13,37 @@ You can either
 - launch the program by double-clicking on the program/link icon, or
 - launch the program by dragging a yWriter project file and dropping it on the program/link icon.
 
-The report generator processes .yw5, .yw6 and .yw7 project files. If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **Select File**.
+*yw-renumber* processes .yw7 project files. If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **Select File**.
 
-The report options are set by ticking checkboxes. On program startup, the latest options selected are preset.
+The style options are set by ticking checkboxes and filling out forms. On program startup, the latest options selected are preset.
 
-When the yWriter project is selected and the options are set, you can launch the report generator with **Create report**. A HTML report file is created in the yWriter project folder, and a web browser window opens to show it. If a report file already exists, you will be asked before it is overwritten.
-
-If you wish to keep a report, you can save it under a different name from within the web browser.
-
-You can generate as many reports with different options as you like without exiting the program in between. Note, however, that a new tab may be created in the web browser each time, so that you can also see earlier reports for which there is no longer a file.
+When the yWriter project is selected and the options are set, you can launch the renumbering with **Renumber chapter**. The new chapter titles are written directly into the yWriter project file. If the project is open in yWriter, you will be asked to exit yWriter first.
 
 
 ### Options
 
-#### Level options
+#### Chapters
 
-- **Include chapters** -- Create table rows for chapters as specified below.
-- **Include scenes** -- Create table rows for scenes as specified below.
+By default, all normal chapters are renumbered, which are displayed in thin green text in the yWriter chapter list. If you wish to exclude chapters from the numbering, you can change temporarily their type to *"ToDo"* or *"Notes"*, or mark them temporarily *"unused"*. Another option is to mark them as *section beginnings* (see below).
 
-#### Type options
+- **Include Section beginnings** -- Include chapters marked *"This chapter begins a new section"* in the yWriter chapter dialog.
+- **Include "unused" chapters** -- Include chapters marked *"Unused"* in yWriter.
 
-- **Include normal** -- Create a table row for every "normal" chapter or scene.
-- **Include unused** -- Create a table row for every "unused" chapter or scene.
-- **Include notes** -- Create a table row for every chapter or scene marked "Notes" or "Info".
-- **Include todo** -- Create a table row for every chapter or scene marked "ToDo" (.yw7 only).
-- **Include unexported** -- Create table rows for scenes that won't be exported as RTF from yWriter.
+#### Styles
 
-#### Columns
+- **Arabic numbers** -- 1, 2, 3 ...
+- **Roman numbers** -- I, II, III ... (case can be set)
+- **Written out in English** -- ONE, TWO, THREE ... (case can be set)
+- **Uppercase** -- All characters of the number are uppercase.
+- **Capitalized** -- The first character of the number is uppercase, the others are lowercase.
+- **Lowercase** -- All characters of the number are lowercase.
 
-- **Title** -- Create a column for chapter/scene titles.
-- **Description** -- Create a column for chapter/scene descriptions.
-- **Viewpoint** -- Create a column for scene viewpoints.
-- **Tags** -- Create a column for scene tags (comma separated).
-- **Notes** -- Create a column for scene notes.
-- **Date** -- Create a column for either specific date or day.
-- **Time** -- Create a column for either specific time or hour/minute.
-- **Duration** -- Create a column for days, hours, minutes the scene lasts.
-- **A/R-Goal-Conflict-Outcome** -- Create four columns (A/R, Goal etc.) 
-- **Ratings** -- Create four columns (scene rating 1-4).
-- **Word count** -- Create a column for scene word count.
-- **Letter count** -- Create a column for scene letter count.
-- **Status** -- Create a column for scene status (Outline, Draft etc.)
-- **Characters** -- Create a column for characters in scene (comma separated).
-- **Locations** -- Create a column for locations in scene (comma separated).
-- **Items** -- Create a column for items in scene (comma separated).
+Note: The case options do not apply to the prefix and suffix.
+
+#### Add to number
+
+- **Prefix** -- A string preceding all numbers.
+- **Suffix** -- A string following all numbers.
 
 
 ## Configuration file

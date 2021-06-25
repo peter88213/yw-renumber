@@ -24,7 +24,7 @@ class RnUi(UiTk):
     tUnused = 'Include "unused" chapters'
     tArabic = 'Arabic numbers'
     tRoman = 'Roman numbers'
-    tEnglish = 'Outspelled in English'
+    tEnglish = 'Written out in English'
     tLowercase = 'Lowercase'
     tUpcase = 'Uppercase'
     tCapitalize = 'Capitalized'

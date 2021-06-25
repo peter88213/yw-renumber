@@ -4,12 +4,7 @@
 
 ## Changelog
 
-### v0.4.0 Add date, time and duration columns
+### v0.2.0 Beta test release 
 
-Based on PyWriter v 3.10.0
-
-
-### v0.2.0
-
-Beta test release based on PyWriter v3.8.2.
+Based on PyWriter v3.10.2.
 
