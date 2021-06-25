@@ -45,9 +45,12 @@ def run(sourcePath):
         for i in range(RnUi.optionsTotal):
             options.append(False)
 
-        # Preset Upcase
+        # Fix preset.
 
-        options[6] = True
+        options[2] = 0
+        options[3] = 0
+        options[4] = ''
+        options[5] = ''
 
     #--- Instantiate a user interface object
 
@@ -58,13 +61,9 @@ def run(sourcePath):
     optionCnt += 1
     ui.Unused.set(options[optionCnt])
     optionCnt += 1
-    ui.Roman.set(options[optionCnt])
+    ui.Style.set(options[optionCnt])
     optionCnt += 1
-    ui.English.set(options[optionCnt])
-    optionCnt += 1
-    ui.Upcase.set(options[optionCnt])
-    optionCnt += 1
-    ui.Capitalize.set(options[optionCnt])
+    ui.Case.set(options[optionCnt])
     optionCnt += 1
     ui.Prefix.set(options[optionCnt].replace('|', ''))
     optionCnt += 1
@@ -116,13 +115,9 @@ def run(sourcePath):
     optionCnt += 1
     config.set('OPTIONS', str(optionCnt), str(ui.Unused.get()))
     optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), str(ui.Roman.get()))
+    config.set('OPTIONS', str(optionCnt), str(ui.Style.get()))
     optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), str(ui.English.get()))
-    optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), str(ui.Upcase.get()))
-    optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), str(ui.Capitalize.get()))
+    config.set('OPTIONS', str(optionCnt), str(ui.Case.get()))
     optionCnt += 1
     config.set('OPTIONS', str(optionCnt), '|' + str(ui.Prefix.get() + '|'))
     optionCnt += 1

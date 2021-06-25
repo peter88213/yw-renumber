@@ -18,6 +18,7 @@ class RnUi(UiTk):
     """Extend the Tkinter GUI, 
     and link it to the application.
     """
+    optionsTotal = 6
 
     tParts = 'Include Section beginnings'
     tUnused = 'Include "unused" chapters'
@@ -29,7 +30,6 @@ class RnUi(UiTk):
     tCapitalize = 'Capitalized'
     tPrefix = 'Prefix'
     tSuffix = 'Suffix'
-    optionsTotal = 8
 
     def __init__(self, title, description=None):
         """Make the converter object visible to the user interface 
@@ -47,22 +47,20 @@ class RnUi(UiTk):
         self.hdTypes = Label(self.root, text='Chapters')
         self.hdOptions = Label(self.root, text='Style')
         self.hdAdd = Label(self.root, text='Add to number')
+        self.hdPrefix = Label(self.root, text=self.tPrefix)
+        self.hdSuffix = Label(self.root, text=self.tSuffix)
         self.appInfo = Label(self.root, text='')
-        self.appInfo.config(height=2, width=80)
+        self.appInfo.config(height=2, width=75)
 
         self.successInfo = Label(self.root)
-        self.successInfo.config(height=1, width=80)
+        self.successInfo.config(height=1, width=75)
 
         self.processInfo = Label(self.root, text='')
 
         self.Parts = BooleanVar()
         self.Unused = BooleanVar()
-        self.Arabic = BooleanVar()
-        self.Roman = BooleanVar()
-        self.English = BooleanVar()
-        self.Upcase = BooleanVar()
-        self.Capitalize = BooleanVar()
-        self.Lowercase = BooleanVar()
+        self.Style = IntVar()
+        self.Case = IntVar()
         self.Prefix = StringVar()
         self.Suffix = StringVar()
 
@@ -71,19 +69,24 @@ class RnUi(UiTk):
         self.root.UnusedCheckbox = ttk.Checkbutton(
             text=self.tUnused, variable=self.Unused, onvalue=True, offvalue=False)
 
-        self.root.ArabicCheckbox = ttk.Checkbutton(
-            text=self.tArabic, variable=self.Arabic, onvalue=True, offvalue=False)
-        self.root.RomanCheckbox = ttk.Checkbutton(
-            text=self.tRoman, variable=self.Roman, onvalue=True, offvalue=False)
-        self.root.EnglishCheckbox = ttk.Checkbutton(
-            text=self.tEnglish, variable=self.English, onvalue=True, offvalue=False)
+        self.root.ArabicCheckbox = ttk.Radiobutton(
+            text=self.tArabic, variable=self.Style, value=0)
+        self.root.RomanCheckbox = ttk.Radiobutton(
+            text=self.tRoman, variable=self.Style, value=1)
+        self.root.EnglishCheckbox = ttk.Radiobutton(
+            text=self.tEnglish, variable=self.Style, value=2)
 
-        self.root.UpcaseCheckbox = ttk.Checkbutton(
-            text=self.tUpcase, variable=self.Upcase, onvalue=True, offvalue=False)
-        self.root.CapitalizeCheckbox = ttk.Checkbutton(
-            text=self.tCapitalize, variable=self.Capitalize, onvalue=True, offvalue=False)
-        self.root.LowercaseCheckbox = ttk.Checkbutton(
-            text=self.tLowercase, variable=self.Lowercase, onvalue=True, offvalue=False)
+        self.root.UpcaseCheckbox = ttk.Radiobutton(
+            text=self.tUpcase, variable=self.Case, value=0)
+        self.root.CapitalizeCheckbox = ttk.Radiobutton(
+            text=self.tCapitalize, variable=self.Case, value=1)
+        self.root.LowercaseCheckbox = ttk.Radiobutton(
+            text=self.tLowercase, variable=self.Case, value=2)
+
+        self.root.PrefixEntry = Entry(
+            text=self.tCapitalize, textvariable=self.Prefix)
+        self.root.SuffixEntry = Entry(
+            text=self.tLowercase, textvariable=self.Suffix)
 
         self.root.selectButton = Button(
             text="Select file", command=self.select_file)
@@ -97,37 +100,62 @@ class RnUi(UiTk):
         self.root.quitButton = Button(text='Quit', command=self.stop)
         self.root.quitButton.config(height=1, width=20)
 
-        rowCnt = 1
-        self.hdTypes.grid(row=rowCnt, column=1, sticky=W,
+        row1Cnt = 1
+        self.hdTypes.grid(row=row1Cnt, column=1, sticky=W,
                           padx=20)
-        rowCnt += 1
+        row1Cnt += 1
         self.root.PartsCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20)
-        rowCnt += 1
+            row=row1Cnt, column=1, sticky=W, padx=20)
+        row1Cnt += 1
         self.root.UnusedCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20)
+            row=row1Cnt, column=1, sticky=W, padx=20)
 
-        rowCnt = 1
-        self.hdOptions.grid(row=rowCnt, column=2, sticky=W,
+        row2Cnt = 1
+        self.hdOptions.grid(row=row2Cnt, column=2, sticky=W,
                             padx=20)
-        rowCnt += 1
+        row2Cnt += 1
         self.root.ArabicCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.RomanCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.EnglishCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.UpcaseCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.CapitalizeCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.LowercaseCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
+            row=row2Cnt, column=2, sticky=W, padx=20)
+
+        row3Cnt = 1
+        self.hdAdd.grid(row=row3Cnt, column=3, sticky=W,
+                        padx=20)
+        row3Cnt += 1
+        self.hdPrefix.grid(row=row3Cnt, column=3, sticky=W,
+                           padx=20)
+        row3Cnt += 1
+        self.root.PrefixEntry.grid(
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
+        self.hdSuffix.grid(row=row3Cnt, column=3, sticky=W,
+                           padx=20)
+        row3Cnt += 1
+        self.root.SuffixEntry.grid(
+            row=row3Cnt, column=3, sticky=W, padx=20)
+
+        if row3Cnt > row2Cnt:
+            rowCnt = row3Cnt
+
+        else:
+            rowCnt = row2Cnt
+
+        if row1Cnt > rowCnt:
+            rowCnt = row1Cnt
 
         rowCnt += 1
         self.appInfo.grid(row=rowCnt, column=1,
@@ -200,10 +228,8 @@ class RnUi(UiTk):
         if self.sourcePath:
             kwargs = {'parts': self.Parts.get(),
                       'unused': self.Unused.get(),
-                      'roman': self.Roman.get(),
-                      'english': self.English.get(),
-                      'upcase': self.Upcase.get(),
-                      'capitalize': self.Capitalize.get(),
+                      'style': self.Style.get(),
+                      'case': self.Case.get(),
                       'prefix': self.Prefix.get(),
                       'suffix': self.Suffix.get(),
                       }

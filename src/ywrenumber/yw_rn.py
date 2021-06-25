@@ -121,19 +121,19 @@ class YwRn():
             if source.chapters[chId].chType == 0:
                 i += 1
 
-                if kwargs['roman']:
+                if kwargs['style'] == 1:
                     number = number_to_roman(i)
 
-                elif kwargs['english']:
+                elif kwargs['style'] == 2:
                     number = number_to_english(i)
 
                 else:
                     number = str(i)
 
-                if kwargs['upcase']:
+                if kwargs['case'] == 0:
                     number = number.upper()
 
-                elif kwargs['capitalize']:
+                elif kwargs['case'] == 2:
                     number = number.capitalize()
 
                 source.chapters[chId].title = kwargs['prefix'] + \
