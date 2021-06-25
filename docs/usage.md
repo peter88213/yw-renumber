@@ -42,8 +42,8 @@ Note: The case options do not apply to the prefix and suffix.
 
 #### Add to number
 
-- **Prefix** -- A string preceding all numbers.
-- **Suffix** -- A string following all numbers.
+- **Prefix** -- A string preceding each number.
+- **Suffix** -- A string following each number.
 
 
 ## Configuration file
