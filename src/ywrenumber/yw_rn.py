@@ -18,6 +18,35 @@ class YwRn():
 
     def run(self, sourcePath, **kwargs):
 
+        ROMAN = [
+            (1000, "m"),
+            (900, "cm"),
+            (500, "d"),
+            (400, "cd"),
+            (100, "c"),
+            (90, "xc"),
+            (50, "l"),
+            (40, "xl"),
+            (10, "x"),
+            (9, "ix"),
+            (5, "v"),
+            (4, "iv"),
+            (1, "i"),
+        ]
+
+        def number_to_roman(n):
+
+            result = []
+
+            for (arabic, roman) in ROMAN:
+                (factor, n) = divmod(n, arabic)
+                result.append(roman * factor)
+
+                if n == 0:
+                    break
+
+            return "".join(result)
+
         TENS = {30: 'thirty', 40: 'forty', 50: 'fifty',
                 60: 'sixty', 70: 'seventy', 80: 'eighty', 90: 'ninety'}
         ZERO_TO_TWENTY = (
@@ -26,19 +55,25 @@ class YwRn():
         )
 
         def number_to_english(n):
+
             if any(not x.isdigit() for x in str(n)):
                 return ''
 
             if n <= 20:
                 return ZERO_TO_TWENTY[n]
+
             elif n < 100 and n % 10 == 0:
                 return TENS[n]
+
             elif n < 100:
                 return number_to_english(n - (n % 10)) + ' ' + number_to_english(n % 10)
+
             elif n < 1000 and n % 100 == 0:
                 return number_to_english(n / 100) + ' hundred'
+
             elif n < 1000:
                 return number_to_english(n / 100) + ' hundred ' + number_to_english(n % 100)
+
             elif n < 1000000:
                 return number_to_english(n / 1000) + ' thousand ' + number_to_english(n % 1000)
 
@@ -71,14 +106,38 @@ class YwRn():
         for chId in source.srtChapters:
 
             if source.chapters[chId].isUnused:
-                continue
+
+                if not kwargs['unused']:
+                    continue
 
             if source.chapters[chId].isTrash:
                 continue
 
+            if source.chapters[chId].chLevel == 1:
+
+                if not kwargs['parts']:
+                    continue
+
             if source.chapters[chId].chType == 0:
                 i += 1
-                source.chapters[chId].title = number_to_english(i)
+
+                if kwargs['roman']:
+                    number = number_to_roman(i)
+
+                elif kwargs['english']:
+                    number = number_to_english(i)
+
+                else:
+                    number = str(i)
+
+                if kwargs['upcase']:
+                    number = number.upper()
+
+                elif kwargs['capitalize']:
+                    number = number.capitalize()
+
+                source.chapters[chId].title = kwargs['prefix'] + \
+                    number + kwargs['suffix']
 
         message = source.write()
         self.ui.set_info_how(message)

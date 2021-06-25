@@ -26,9 +26,7 @@ def run(sourcePath):
     iniFile = iniPath + '/yw-renumber.ini'
     config = ConfigParser()
 
-    levels = []
-    types = []
-    columns = []
+    options = []
 
     try:
         config.read(iniFile)
@@ -39,82 +37,38 @@ def run(sourcePath):
             if sourcePath == 'None':
                 sourcePath = None
 
-        for i in range(RnUi.levelsTotal):
-            levels.append(config.get('LEVELS', str(i)))
-
-        for i in range(RnUi.typesTotal):
-            types.append(config.get('TYPES', str(i)))
-
-        for i in range(RnUi.columnsTotal):
-            columns.append(config.get('COLUMNS', str(i)))
+        for i in range(RnUi.optionsTotal):
+            options.append(config.get('OPTIONS', str(i)))
 
     except:
 
-        for i in range(RnUi.levelsTotal):
-            levels.append(True)
+        for i in range(RnUi.optionsTotal):
+            options.append(False)
 
-        for i in range(RnUi.typesTotal):
-            types.append(False)
+        # Preset Upcase
 
-        for i in range(RnUi.columnsTotal):
-            columns.append(False)
-
-        types[0] = True
-        columns[0] = True
-        columns[1] = True
+        options[6] = True
 
     #--- Instantiate a user interface object
 
     ui = RnUi('Renumber yWriter chapters @release')
 
     optionCnt = 0
-    ui.ShowChapters.set(levels[optionCnt])
+    ui.Parts.set(options[optionCnt])
     optionCnt += 1
-    ui.ShowScenes.set(levels[optionCnt])
-
-    optionCnt = 0
-    ui.ShowNormalType.set(types[optionCnt])
+    ui.Unused.set(options[optionCnt])
     optionCnt += 1
-    ui.ShowUnusedType.set(types[optionCnt])
+    ui.Roman.set(options[optionCnt])
     optionCnt += 1
-    ui.ShowNotesType.set(types[optionCnt])
+    ui.English.set(options[optionCnt])
     optionCnt += 1
-    ui.ShowTodoType.set(types[optionCnt])
+    ui.Upcase.set(options[optionCnt])
     optionCnt += 1
-    ui.ShowUnexported.set(types[optionCnt])
-
-    optionCnt = 0
-    ui.ShowTitle.set(columns[optionCnt])
+    ui.Capitalize.set(options[optionCnt])
     optionCnt += 1
-    ui.ShowDescription.set(columns[optionCnt])
+    ui.Prefix.set(options[optionCnt].replace('|', ''))
     optionCnt += 1
-    ui.ShowViewpoint.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowTags.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowNotes.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowDate.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowTime.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowDuration.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowActionPattern.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowRatings.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowWordcount.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowLettercount.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowStatus.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowCharacters.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowLocations.set(columns[optionCnt])
-    optionCnt += 1
-    ui.ShowItems.set(columns[optionCnt])
+    ui.Suffix.set(options[optionCnt].replace('|', ''))
 
     if sourcePath is not None:
 
@@ -154,63 +108,25 @@ def run(sourcePath):
 
     config.set('FILES', 'yw_last_open', sourcePath)
 
-    if not config.has_section('LEVELS'):
-        config.add_section('LEVELS')
+    if not config.has_section('OPTIONS'):
+        config.add_section('OPTIONS')
 
     optionCnt = 0
-    config.set('LEVELS', str(optionCnt), str(ui.ShowChapters.get()))
+    config.set('OPTIONS', str(optionCnt), str(ui.Parts.get()))
     optionCnt += 1
-    config.set('LEVELS', str(optionCnt), str(ui.ShowScenes.get()))
-
-    if not config.has_section('TYPES'):
-        config.add_section('TYPES')
-
-    optionCnt = 0
-    config.set('TYPES', str(optionCnt), str(ui.ShowNormalType.get()))
+    config.set('OPTIONS', str(optionCnt), str(ui.Unused.get()))
     optionCnt += 1
-    config.set('TYPES', str(optionCnt), str(ui.ShowUnusedType.get()))
+    config.set('OPTIONS', str(optionCnt), str(ui.Roman.get()))
     optionCnt += 1
-    config.set('TYPES', str(optionCnt), str(ui.ShowNotesType.get()))
+    config.set('OPTIONS', str(optionCnt), str(ui.English.get()))
     optionCnt += 1
-    config.set('TYPES', str(optionCnt), str(ui.ShowTodoType.get()))
+    config.set('OPTIONS', str(optionCnt), str(ui.Upcase.get()))
     optionCnt += 1
-    config.set('TYPES', str(optionCnt), str(ui.ShowUnexported.get()))
-
-    if not config.has_section('COLUMNS'):
-        config.add_section('COLUMNS')
-
-    optionCnt = 0
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowTitle.get()))
+    config.set('OPTIONS', str(optionCnt), str(ui.Capitalize.get()))
     optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowDescription.get()))
+    config.set('OPTIONS', str(optionCnt), '|' + str(ui.Prefix.get() + '|'))
     optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowViewpoint.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowTags.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowNotes.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowDate.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowTime.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowDuration.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowActionPattern.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowRatings.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowWordcount.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowLettercount.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowStatus.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowCharacters.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowLocations.get()))
-    optionCnt += 1
-    config.set('COLUMNS', str(optionCnt), str(ui.ShowItems.get()))
+    config.set('OPTIONS', str(optionCnt), '|' + str(ui.Suffix.get() + '|'))
 
     with open(iniFile, 'w') as f:
         config.write(f)
