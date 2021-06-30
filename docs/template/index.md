@@ -27,6 +27,11 @@ The *yw-renumber* script has a graphical user interface. However, a Python 3 ins
 See the [instructions for use](usage)
 
 
+## Credits
+
+- User *Hunter_71* presented the number to English conversion algorithm on [stack overflow](https://stackoverflow.com/a/51849443).
+- User *Aristide* presented the integer to roman numeral conversion on [stack overflow](https://stackoverflow.com/a/47713392).
+
 ## License
 
 yw-renumber is distributed under the [MIT
