@@ -4,7 +4,7 @@
 Version @release
 
 Copyright (c) 2021 Peter Triesberger
-For further information see https://github.com/peter88213/yw-reporter
+For further information see https://github.com/peter88213/yw-renumber
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import sys
@@ -19,7 +19,8 @@ def run(sourcePath):
 
     #--- Try to get persistent configuration data
 
-    iniPath = os.getenv('APPDATA').replace('\\', '/') + '/yw-renumber'
+    iniPath = os.getenv('APPDATA').replace('\\', '/') + \
+        '/pyWriter/yw-renumber/config'
 
     if not os.path.isdir(iniPath):
         os.makedirs(iniPath)

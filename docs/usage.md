@@ -6,7 +6,7 @@ The *yw-renumber* Python script rewrites chapter titles in yWriter 7 projects.
 
 ## Usage
 
-It is recommended to create a link on the desktop.
+The included installation script creates a shortcut on the desktop. 
 
 You can either
 
@@ -52,6 +52,13 @@ The latest yWriter project selected and the latest options are saved in a config
 
 In Windows, this is the file path: 
 
-`c:\Users\<user name>\AppData\Roaming\yw-renumber\yw-renumber.ini`
+`c:\Users\<user name>\AppData\Roaming\PyWriter\yw-renumber\config\yw-renumber.ini`
 
 You can safely delete this file at any time.
+
+## Installation path
+
+The **install.bat** installation script installs *yw-renumber.pyw* in the user profile. This is the installation path: 
+
+`c:\Users\<user name>\AppData\Roaming\PyWriter\yw-renumber`
+

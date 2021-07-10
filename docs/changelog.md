@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v0.2.3 Include installation script
+
+**install.bat** installs the script for the local user and creates a 
+shortcut on the desktop.
+
+Based on PyWriter v3.12.7
+
 ### v0.2.2 Bugfix release
 
 - Import sys in order to process the command line argument.
