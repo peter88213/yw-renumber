@@ -6,7 +6,7 @@ The *yw-renumber* Python script rewrites chapter titles in yWriter 7 projects.
 
 ## Usage
 
-The included installation script creates a shortcut on the desktop. 
+The included installation script prompts you to create a shortcut on the desktop. 
 
 You can either
 
