@@ -10,16 +10,16 @@
 	<property name="release-name" value="${project-name}_v${release}" />
 
 	<target name="build" description="inline all library modules">
-		<delete file="${test}/yw-renumber.py" />
+		<delete file="${test}/yw_renumber.py" />
 		<exec executable="python" failonerror="true">
-		    <arg value="${src}/build_yw-renumber.py"/>
+		    <arg value="${src}/build_yw_renumber.py"/>
 		</exec>
 		<fixcrlf encoding="utf-8" eol="lf" srcdir="${test}" includes="**/*.py" />
 	</target>
 
 	<target name="test" description="inline all library modules">
 		<exec executable="python" failonerror="true">
-		    <arg value="${test}/test_yw-renumber.py"/>
+		    <arg value="${test}/test_yw_renumber.py"/>
 		</exec>
 	</target>
 
@@ -33,7 +33,7 @@
 
 		<copy file="./install.bat" todir="${build}/${release-name}" />
 		
-		<copy file="${test}/yw-renumber.pyw" todir="${build}/${release-name}" />
+		<copy file="${test}/yw_renumber.pyw" tofile="${build}/${release-name}/yw-renumber.pyw" />
 		<replace encoding="utf-8" file="${build}/${release-name}/yw-renumber.pyw" token="@release" value="${release}" />
 
 		<copy file="../LICENSE" todir="${build}/${release-name}" />
@@ -48,7 +48,7 @@
 
 	<target name="clean" description="clean up">
 		
-		<delete file="${test}/yw-renumber.pyw" />
+		<delete file="${test}/yw_renumber.pyw" />
 		
 	</target>
 
