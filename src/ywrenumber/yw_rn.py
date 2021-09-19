@@ -145,7 +145,7 @@ class YwRn():
                     number = number.capitalize()
 
                 source.chapters[chId].title = kwargs['headingPrefix'].replace(
-                    '"', '') + number + kwargs['headingSuffix'].replace('"', '')
+                    '|', '') + number + kwargs['headingSuffix'].replace('|', '')
 
         message = source.write()
         self.ui.set_info_how(message)

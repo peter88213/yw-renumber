@@ -60,8 +60,8 @@ class RnUi(UiTk):
         self.renUnused = BooleanVar(value=kwargs['ren_unused'])
         self.numberingStyle = IntVar(value=kwargs['numberingStyle'])
         self.numberingCase = IntVar(value=kwargs['numberingCase'])
-        self.headingPrefix = StringVar(value=kwargs['headingPrefix'].replace('"', ''))
-        self.headingSuffix = StringVar(value=kwargs['headingSuffix'].replace('"', ''))
+        self.headingPrefix = StringVar(value=kwargs['headingPrefix'].replace('|', ''))
+        self.headingSuffix = StringVar(value=kwargs['headingSuffix'].replace('|', ''))
 
         self.root.PartsCheckbox = ttk.Checkbutton(
             text=self.tParts, variable=self.renParts, onvalue=True, offvalue=False)
@@ -213,8 +213,8 @@ class RnUi(UiTk):
                 ren_unused=self.renUnused.get(),
                 numberingStyle=str(self.numberingStyle.get()),
                 numberingCase=str(self.numberingCase.get()),
-                headingPrefix='"' + self.headingPrefix.get() + '"',
-                headingSuffix='"' + self.headingSuffix.get() + '"',
+                headingPrefix='|' + self.headingPrefix.get() + '|',
+                headingSuffix='|' + self.headingSuffix.get() + '|',
             )
             self.converter.run(self.sourcePath, **self.kwargs)
 

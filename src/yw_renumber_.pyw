@@ -25,8 +25,8 @@ SETTINGS = dict(
     yw_last_open='',
     numberingStyle='0',
     numberingCase='0',
-    headingPrefix='""',
-    headingSuffix='""',
+    headingPrefix='||',
+    headingSuffix='||',
 )
 
 OPTIONS = dict(

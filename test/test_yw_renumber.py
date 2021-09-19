@@ -8,7 +8,7 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 from shutil import copyfile
 import os
 import unittest
-import yw_renumber_
+import yw_renumber
 
 
 # Test environment
@@ -73,21 +73,21 @@ class NormalOperation(unittest.TestCase):
     def test_defaults(self):
         copyfile(NORMAL_YW7, TEST_YW7)
         os.chdir(TEST_EXEC_PATH)
-        yw_renumber_.run(TEST_YW7, silentMode=True)
+        yw_renumber.run(TEST_YW7, silentMode=True)
         self.assertEqual(read_file(TEST_YW7), read_file(DEFAULT_YW7))
 
     def test_roman(self):
         copyfile(NORMAL_YW7, TEST_YW7)
         copyfile(INI_ROMAN, TEST_INI)
         os.chdir(TEST_EXEC_PATH)
-        yw_renumber_.run(TEST_YW7, silentMode=True, installDir=TEST_EXEC_PATH)
+        yw_renumber.run(TEST_YW7, silentMode=True, installDir=TEST_EXEC_PATH)
         self.assertEqual(read_file(TEST_YW7), read_file(ROMAN_YW7))
 
     def test_written(self):
         copyfile(NORMAL_YW7, TEST_YW7)
         copyfile(INI_WRITTEN, TEST_INI)
         os.chdir(TEST_EXEC_PATH)
-        yw_renumber_.run(TEST_YW7, silentMode=True, installDir=TEST_EXEC_PATH)
+        yw_renumber.run(TEST_YW7, silentMode=True, installDir=TEST_EXEC_PATH)
         self.assertEqual(read_file(TEST_YW7), read_file(WRITTEN_YW7))
 
     def tearDown(self):
