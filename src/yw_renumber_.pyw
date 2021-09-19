@@ -23,8 +23,8 @@ APPNAME = 'yw-renumber'
 
 SETTINGS = dict(
     yw_last_open='',
-    numberingStyle=0,
-    numberingCase=0,
+    numberingStyle='0',
+    numberingCase='0',
     headingPrefix='""',
     headingSuffix='""',
 )

@@ -4,8 +4,9 @@
 
 ## Changelog
 
-### v1.0.0
+### v1.0.0 Final release
 
+- Fix a bug where files created with yWriter versions before 7.0.7.2 are not processed.
 - The configuration file has a new format.
 - Major refactoring to enable automated testing.
 

@@ -211,8 +211,8 @@ class RnUi(UiTk):
                 yw_last_open=self.sourcePath,
                 ren_parts=self.renParts.get(),
                 ren_unused=self.renUnused.get(),
-                numberingStyle=self.numberingStyle.get(),
-                numberingCase=self.numberingCase.get(),
+                numberingStyle=str(self.numberingStyle.get()),
+                numberingCase=str(self.numberingCase.get()),
                 headingPrefix='"' + self.headingPrefix.get() + '"',
                 headingSuffix='"' + self.headingSuffix.get() + '"',
             )

@@ -126,22 +126,22 @@ class YwRn():
                 if not kwargs['ren_parts']:
                     continue
 
-            if source.chapters[chId].chType == 0:
+            if source.chapters[chId].chType == 0 or source.chapters[chId].oldType == 0:
                 i += 1
 
-                if kwargs['numberingStyle'] == 1:
+                if kwargs['numberingStyle'] == '1':
                     number = number_to_roman(i)
 
-                elif kwargs['numberingStyle'] == 2:
+                elif kwargs['numberingStyle'] == '2':
                     number = number_to_english(i)
 
                 else:
                     number = str(i)
 
-                if kwargs['numberingCase'] == 0:
+                if kwargs['numberingCase'] == '0':
                     number = number.upper()
 
-                elif kwargs['numberingCase'] == 1:
+                elif kwargs['numberingCase'] == '1':
                     number = number.capitalize()
 
                 source.chapters[chId].title = kwargs['headingPrefix'].replace(
