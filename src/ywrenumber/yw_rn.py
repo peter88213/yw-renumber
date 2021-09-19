@@ -115,7 +115,7 @@ class YwRn():
 
             if source.chapters[chId].isUnused:
 
-                if not kwargs['unused']:
+                if not kwargs['ren_unused']:
                     continue
 
             if source.chapters[chId].isTrash:
@@ -123,29 +123,29 @@ class YwRn():
 
             if source.chapters[chId].chLevel == 1:
 
-                if not kwargs['parts']:
+                if not kwargs['ren_parts']:
                     continue
 
             if source.chapters[chId].chType == 0:
                 i += 1
 
-                if kwargs['style'] == 1:
+                if kwargs['numberingStyle'] == 1:
                     number = number_to_roman(i)
 
-                elif kwargs['style'] == 2:
+                elif kwargs['numberingStyle'] == 2:
                     number = number_to_english(i)
 
                 else:
                     number = str(i)
 
-                if kwargs['case'] == 0:
+                if kwargs['numberingCase'] == 0:
                     number = number.upper()
 
-                elif kwargs['case'] == 1:
+                elif kwargs['numberingCase'] == 1:
                     number = number.capitalize()
 
-                source.chapters[chId].title = kwargs['prefix'] + \
-                    number + kwargs['suffix']
+                source.chapters[chId].title = kwargs['headingPrefix'].replace(
+                    '"', '') + number + kwargs['headingSuffix'].replace('"', '')
 
         message = source.write()
         self.ui.set_info_how(message)

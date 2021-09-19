@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v1.0.0
+
+- The configuration file has a new format.
+- Major refactoring to enable automated testing.
+
+Based on PyWriter v3.24.3
+
 ### v0.2.4 No automatic shortcut creation
 
 - Due to sporadic security warnings, the automatic shortcut creation during installation is removed. The user is now guided to create the application shortcut manually.  

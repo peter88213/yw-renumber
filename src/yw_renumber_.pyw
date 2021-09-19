@@ -7,134 +7,96 @@ Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw-renumber
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
-import sys
 import os
-from configparser import ConfigParser
+import sys
+import argparse
+from pywriter.config.configuration import Configuration
+
+from pywriter.ui.ui import Ui
 
 from ywrenumber.yw_rn import YwRn
 from ywrenumber.rn_ui import RnUi
 
 
-def run(sourcePath):
+SUFFIX = '_report'
+APPNAME = 'yw-renumber'
 
-    #--- Try to get persistent configuration data
+SETTINGS = dict(
+    yw_last_open='',
+    numberingStyle=0,
+    numberingCase=0,
+    headingPrefix='""',
+    headingSuffix='""',
+)
 
-    iniPath = os.getenv('APPDATA').replace('\\', '/') + \
-        '/pyWriter/yw-renumber/config'
+OPTIONS = dict(
+    ren_unused=False,
+    ren_parts=False,
+)
 
-    if not os.path.isdir(iniPath):
-        os.makedirs(iniPath)
 
-    iniFile = iniPath + '/yw-renumber.ini'
-    config = ConfigParser()
+def run(sourcePath, silentMode=True, installDir=''):
 
-    options = []
+    #--- Load configuration
 
-    try:
-        config.read(iniFile)
+    sourceDir = os.path.dirname(sourcePath)
 
-        if sourcePath is None:
-            sourcePath = config.get('FILES', 'yw_last_open')
-
-            if sourcePath == 'None':
-                sourcePath = None
-
-        for i in range(RnUi.optionsTotal):
-            options.append(config.get('OPTIONS', str(i)))
-
-    except:
-
-        for i in range(RnUi.optionsTotal):
-            options.append(False)
-
-        # Fix preset.
-
-        options[2] = 0
-        options[3] = 0
-        options[4] = ''
-        options[5] = ''
-
-    #--- Instantiate a user interface object
-
-    ui = RnUi('Renumber yWriter chapters @release')
-
-    optionCnt = 0
-    ui.Parts.set(options[optionCnt])
-    optionCnt += 1
-    ui.Unused.set(options[optionCnt])
-    optionCnt += 1
-    ui.Style.set(options[optionCnt])
-    optionCnt += 1
-    ui.Case.set(options[optionCnt])
-    optionCnt += 1
-    ui.Prefix.set(options[optionCnt].replace('|', ''))
-    optionCnt += 1
-    ui.Suffix.set(options[optionCnt].replace('|', ''))
-
-    if sourcePath is not None:
-
-        if os.path.isfile(sourcePath):
-            ui.sourcePath = sourcePath
-            ui.set_info_what(
-                'File: ' + os.path.normpath(sourcePath))
-            ui.root.runButton.config(state='normal')
-
-        else:
-            sourcePath = None
-
-    converter = YwRn()
-    # instantiate a converter object
-
-    # Create a bidirectional association between the
-    # user interface object and the converter object.
-
-    converter.ui = ui
-    # make the user interface's methods visible to the converter
-
-    ui.converter = converter
-    # make the converter's methods visible to the user interface
-
-    ui.start()
-
-    #--- Save configuration
-
-    if ui.sourcePath is not None:
-        sourcePath = ui.sourcePath
+    if sourceDir == '':
+        sourceDir = './'
 
     else:
-        sourcePath = 'None'
+        sourceDir += '/'
 
-    if not config.has_section('FILES'):
-        config.add_section('FILES')
+    iniFile = installDir + APPNAME + '.ini'
+    configuration = Configuration(SETTINGS, OPTIONS)
+    configuration.read(iniFile)
+    kwargs = dict(
+        suffix=SUFFIX,
+    )
+    kwargs.update(configuration.settings)
+    kwargs.update(configuration.options)
 
-    config.set('FILES', 'yw_last_open', sourcePath)
+    converter = YwRn()
 
-    if not config.has_section('OPTIONS'):
-        config.add_section('OPTIONS')
+    if silentMode:
+        converter.ui = Ui('')
+        converter.run(sourcePath, **kwargs)
 
-    optionCnt = 0
-    config.set('OPTIONS', str(optionCnt), str(ui.Parts.get()))
-    optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), str(ui.Unused.get()))
-    optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), str(ui.Style.get()))
-    optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), str(ui.Case.get()))
-    optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), '|' + str(ui.Prefix.get() + '|'))
-    optionCnt += 1
-    config.set('OPTIONS', str(optionCnt), '|' + str(ui.Suffix.get() + '|'))
+    else:
+        converter.ui = RnUi('Renumber yWriter chapters @release', sourcePath=sourcePath, **kwargs)
+        converter.ui.converter = converter
+        converter.ui.start()
 
-    with open(iniFile, 'w') as f:
-        config.write(f)
+        #--- Save project specific configuration
+
+        for keyword in converter.ui.kwargs:
+
+            if keyword in configuration.options:
+                configuration.options[keyword] = converter.ui.kwargs[keyword]
+
+            elif keyword in configuration.settings:
+                configuration.settings[keyword] = converter.ui.kwargs[keyword]
+
+            configuration.write(iniFile)
 
 
 if __name__ == '__main__':
+    installDir = os.getenv('APPDATA').replace('\\', '/') + '/pyWriter/' + APPNAME + '/config/'
+    os.makedirs(installDir, exist_ok=True)
 
-    try:
-        sourcePath = sys.argv[1].replace('\\', '/')
+    if len(sys.argv) == 1:
+        run('', False, installDir)
 
-    except:
-        sourcePath = None
+    else:
+        parser = argparse.ArgumentParser(
+            description='yWriter report generator',
+            epilog='')
+        parser.add_argument('sourcePath',
+                            metavar='Sourcefile',
+                            help='The path of the yWriter project file.')
 
-    run(sourcePath)
+        parser.add_argument('--silent',
+                            action="store_true",
+                            help='suppress error messages and the request to confirm overwriting')
+        args = parser.parse_args()
+        run(args.sourcePath, args.silent, installDir)
