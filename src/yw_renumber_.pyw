@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Configurable reports from yWriter. 
+"""Renumber yWriter chapters. 
 
 Version @release
 
@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
     else:
         parser = argparse.ArgumentParser(
-            description='yWriter report generator',
+            description='Renumber yWriter chapters',
             epilog='')
         parser.add_argument('sourcePath',
                             metavar='Sourcefile',
@@ -97,6 +97,6 @@ if __name__ == '__main__':
 
         parser.add_argument('--silent',
                             action="store_true",
-                            help='suppress error messages and the request to confirm overwriting')
+                            help='operation without grphical user interface; suppress error messages')
         args = parser.parse_args()
         run(args.sourcePath, args.silent, installDir)

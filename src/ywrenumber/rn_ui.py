@@ -15,21 +15,11 @@ from pywriter.ui.ui_tk import UiTk
 
 
 class RnUi(UiTk):
-    """Extend the Tkinter GUI, 
-    and link it to the application.
+    """Tkinter based GUI.
+    Extend the superclass.
     """
-    tParts = 'Include Section beginnings'
-    tUnused = 'Include "unused" chapters'
-    tArabic = 'Arabic numbers'
-    tRoman = 'Roman numbers'
-    tEnglish = 'Written out in English'
-    tLowercase = 'Lowercase'
-    tUpcase = 'Uppercase'
-    tCapitalize = 'Capitalized'
-    tPrefix = 'headingPrefix'
-    tSuffix = 'headingSuffix'
 
-    def __init__(self, title, description=None, sourcePath=None, **kwargs):
+    def __init__(self, title, sourcePath=None, **kwargs):
         """Make the converter object visible to the user interface 
         in order to make method calls possible.
         Add the widgets needed to invoke the converter manually.
@@ -38,52 +28,51 @@ class RnUi(UiTk):
         self.converter = None
         self.infoWhatText = ''
         self.infoHowText = ''
-        # UiTk.__init__(self, title)
 
         self.root = Tk()
         self.root.title(title)
 
-        self.hdTypes = Label(self.root, text='Chapters')
-        self.hdOptions = Label(self.root, text='numberingStyle')
-        self.hdAdd = Label(self.root, text='Add to number')
-        self.hdPrefix = Label(self.root, text=self.tPrefix)
-        self.hdSuffix = Label(self.root, text=self.tSuffix)
+        self.successInfo = Label(self.root)
+        self.successInfo.config(height=1, width=75)
+        self.processInfo = Label(self.root, text='')
         self.appInfo = Label(self.root, text='')
         self.appInfo.config(height=2, width=75)
 
-        self.successInfo = Label(self.root)
-        self.successInfo.config(height=1, width=75)
-
-        self.processInfo = Label(self.root, text='')
-
+        self.hdTypes = Label(self.root, text='Chapters')
         self.renParts = BooleanVar(value=kwargs['ren_parts'])
         self.renUnused = BooleanVar(value=kwargs['ren_unused'])
+
+        self.hdOptions = Label(self.root, text='NumberingStyle')
         self.numberingStyle = IntVar(value=kwargs['numberingStyle'])
         self.numberingCase = IntVar(value=kwargs['numberingCase'])
+
+        self.hdAdd = Label(self.root, text='Add to number')
+        self.hdPrefix = Label(self.root, text='Heading prefix')
         self.headingPrefix = StringVar(value=kwargs['headingPrefix'].replace('|', ''))
+        self.hdSuffix = Label(self.root, text='Heading suffix')
         self.headingSuffix = StringVar(value=kwargs['headingSuffix'].replace('|', ''))
 
-        self.root.PartsCheckbox = ttk.Checkbutton(
-            text=self.tParts, variable=self.renParts, onvalue=True, offvalue=False)
-        self.root.UnusedCheckbox = ttk.Checkbutton(
-            text=self.tUnused, variable=self.renUnused, onvalue=True, offvalue=False)
+        self.root.partsCheckbox = ttk.Checkbutton(
+            text='Include Section beginnings', variable=self.renParts, onvalue=True, offvalue=False)
+        self.root.unusedCheckbox = ttk.Checkbutton(
+            text='Include "unused" chapters', variable=self.renUnused, onvalue=True, offvalue=False)
 
-        self.root.ArabicCheckbox = ttk.Radiobutton(text=self.tArabic, variable=self.numberingStyle, value=0)
-        self.root.RomanCheckbox = ttk.Radiobutton(text=self.tRoman, variable=self.numberingStyle, value=1)
-        self.root.EnglishCheckbox = ttk.Radiobutton(text=self.tEnglish, variable=self.numberingStyle, value=2)
+        self.root.arabicCheckbox = ttk.Radiobutton(text='Arabic numbers', variable=self.numberingStyle, value=0)
+        self.root.romanCheckbox = ttk.Radiobutton(text='Roman numbers', variable=self.numberingStyle, value=1)
+        self.root.englishCheckbox = ttk.Radiobutton(
+            text='Written out in English', variable=self.numberingStyle, value=2)
 
-        self.root.UpcaseCheckbox = ttk.Radiobutton(text=self.tUpcase, variable=self.numberingCase, value=0)
-        self.root.CapitalizeCheckbox = ttk.Radiobutton(text=self.tCapitalize, variable=self.numberingCase, value=1)
-        self.root.LowercaseCheckbox = ttk.Radiobutton(text=self.tLowercase, variable=self.numberingCase, value=2)
+        self.root.upcaseCheckbox = ttk.Radiobutton(text='Uppercase', variable=self.numberingCase, value=0)
+        self.root.capitalizeCheckbox = ttk.Radiobutton(text='Capitalized', variable=self.numberingCase, value=1)
+        self.root.lowercaseCheckbox = ttk.Radiobutton(text='Lowercase', variable=self.numberingCase, value=2)
 
-        self.root.PrefixEntry = Entry(text=self.tCapitalize, textvariable=self.headingPrefix)
-        self.root.SuffixEntry = Entry(text=self.tLowercase, textvariable=self.headingSuffix)
+        self.root.prefixEntry = Entry(textvariable=self.headingPrefix)
+        self.root.suffixEntry = Entry(textvariable=self.headingSuffix)
 
         self.root.selectButton = Button(text="Select file", command=self.select_file)
         self.root.selectButton.config(height=1, width=20)
 
-        self.root.runButton = Button(
-            text='Renumber chapters', command=self.convert_file)
+        self.root.runButton = Button(text='Renumber chapters', command=self.convert_file)
         self.root.runButton.config(height=1, width=20)
         self.root.runButton.config(state='disabled')
 
@@ -93,35 +82,35 @@ class RnUi(UiTk):
         row1Cnt = 1
         self.hdTypes.grid(row=row1Cnt, column=1, sticky=W, padx=20)
         row1Cnt += 1
-        self.root.PartsCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+        self.root.partsCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
         row1Cnt += 1
-        self.root.UnusedCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+        self.root.unusedCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
 
         row2Cnt = 1
         self.hdOptions.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ArabicCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.arabicCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.RomanCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.romanCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.EnglishCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.englishCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.UpcaseCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.upcaseCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.CapitalizeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.capitalizeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.LowercaseCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.lowercaseCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
 
         row3Cnt = 1
         self.hdAdd.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
         self.hdPrefix.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.PrefixEntry.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.prefixEntry.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
         self.hdSuffix.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.SuffixEntry.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.suffixEntry.grid(row=row3Cnt, column=3, sticky=W, padx=20)
 
         if row3Cnt > row2Cnt:
             rowCnt = row3Cnt

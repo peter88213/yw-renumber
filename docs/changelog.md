@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v1.0.1 Optional update
+
+- Fix "Heading prefix" and "Heading suffix" labels.
+- Refactor for better maintainability.
+
+Based on PyWriter v3.24.3
+
 ### v1.0.0 Final release
 
 - Fix a bug where files created with yWriter versions before 7.0.7.2 are not processed.
