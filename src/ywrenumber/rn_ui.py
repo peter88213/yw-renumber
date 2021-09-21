@@ -47,9 +47,9 @@ class RnUi(UiTk):
         self.numberingCase = IntVar(value=kwargs['numberingCase'])
 
         self.hdAdd = Label(self.root, text='Add to number')
-        self.hdPrefix = Label(self.root, text='Heading prefix')
+        self.hdPrefix = Label(self.root, text='Prefix')
         self.headingPrefix = StringVar(value=kwargs['headingPrefix'].replace('|', ''))
-        self.hdSuffix = Label(self.root, text='Heading suffix')
+        self.hdSuffix = Label(self.root, text='Suffix')
         self.headingSuffix = StringVar(value=kwargs['headingSuffix'].replace('|', ''))
 
         self.root.partsCheckbox = ttk.Checkbutton(
