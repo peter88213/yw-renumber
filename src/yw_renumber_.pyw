@@ -10,8 +10,9 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 import os
 import sys
 import argparse
-from pywriter.config.configuration import Configuration
+from pathlib import Path
 
+from pywriter.config.configuration import Configuration
 from pywriter.ui.ui import Ui
 
 from ywrenumber.yw_rn import YwRn
@@ -81,7 +82,13 @@ def run(sourcePath, silentMode=True, installDir=''):
 
 
 if __name__ == '__main__':
-    installDir = os.getenv('APPDATA').replace('\\', '/') + '/pyWriter/' + APPNAME + '/config/'
+
+    try:
+        installDir = str(Path.home()).replace('\\', '/') + '/.pywriter/' + APPNAME + '/config/'
+
+    except:
+        installDir = ''
+
     os.makedirs(installDir, exist_ok=True)
 
     if len(sys.argv) == 1:

@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v1.0.2 Support non-Windows OS
+
+- Move installation and configuration to another location (see instructions for use).
+
+Based on PyWriter v3.28.1
+
 ### v1.0.1 Optional update
 
 - Fix "Heading prefix" and "Heading suffix" labels.

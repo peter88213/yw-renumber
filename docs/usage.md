@@ -50,15 +50,15 @@ Note: The case options do not apply to the prefix and suffix.
 
 The latest yWriter project selected and the latest options are saved in a configuration file. 
 
-In Windows, this is the file path: 
+on Windows, this is the file path: 
 
-`c:\Users\<user name>\AppData\Roaming\PyWriter\yw-renumber\config\yw-renumber.ini`
+`c:\Users\<user name>\.pywriter\yw-renumber\config\yw-renumber.ini`
 
 You can safely delete this file at any time.
 
 ## Installation path
 
-The **install.bat** installation script installs *yw-renumber.pyw* in the user profile. This is the installation path: 
+The **install.bat** installation script installs *yw-renumber.pyw* in the user profile. This is the installation path on windows: 
 
-`c:\Users\<user name>\AppData\Roaming\PyWriter\yw-renumber`
+`c:\Users\<user name>\.pywriter\yw-renumber`
 

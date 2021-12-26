@@ -1,11 +1,14 @@
 set app=yw-renumber
-set basedir="%APPDATA%\PyWriter"
+set oldappdir="%APPDATA%\PyWriter\%app%"
+set basedir="%USERPROFILE%\.pywriter"
 if not exist %basedir% md %basedir%
-set appdir="%APPDATA%\PyWriter\%app%"
+set appdir="%basedir%\%app%"
+if exist %oldappdir% move %oldappdir% %appdir%
 if not exist %appdir% md %appdir%
+
 copy %app%.pyw %appdir%
 
-set cnfdir="%APPDATA%\PyWriter\%app%\config"
+set cnfdir="%appdir%\config"
 if not exist %cnfdir% md %cnfdir%
 
 rem echo "N" | copy/-Y sample\*.* %cnfdir%
@@ -18,7 +21,7 @@ echo The %app% program is installed.
 echo Now create a shortcut on your desktop. 
 echo For this, hold down the Alt key on your keyboard and then drag and drop %app%.pyw to your desktop. 
 @echo off
-explorer "%APPDATA%\PyWriter\%app%\"
+explorer "%appdir%\"
 pause
 
 :end
