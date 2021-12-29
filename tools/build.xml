@@ -25,8 +25,7 @@
 		</exec>
 	</target>
 
-	<target name="dist" description="generate the distribution">
-		
+	<target name="dist" description="generate the distribution">	
 		<delete dir="${build}" />
 		<delete dir="${dist}" />
 		<mkdir dir="${build}" />
@@ -48,14 +47,11 @@
 
 		<copy file="${docs}/template/index.md" overwrite="True" todir="${docs}" />
 		<replace encoding="utf-8" file="${docs}/index.md" token="0.99.0" value="${release}" />
-
 	</target>
 
-	<target name="clean" description="clean up">
-		
+	<target name="clean" description="clean up">		
 		<delete file="${test}/yw_renumber.pyw" />
-		<delete file="${test}/test_yw_renumber.py" />
-		
+		<delete file="${test}/test_yw_renumber.py" />		
 	</target>
 
 </project>
