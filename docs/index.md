@@ -12,7 +12,6 @@ The *yw-renumber* script has a graphical user interface. However, a Python 3 ins
 
 ## Requirements
 
-- Windows.
 - [Python 3](https://www.python.org). Python 3.4 or more recent will work.
 
 ## Download and install
@@ -20,10 +19,15 @@ The *yw-renumber* script has a graphical user interface. However, a Python 3 ins
 [Download the latest release (version 1.0.2)](https://raw.githubusercontent.com/peter88213/yw-renumber/main/dist/yw-renumber_v1.0.2.zip)
 
 - Unzip the downloaded zipfile "yw-renumber_v1.0.2.zip" into a new folder.
-- Move into this new folder and launch **install.bat**. This installs the script for the local user.
+- Move into this new folder and launch **setup.pyw**. This installs the script for the local user.
 - Create a shortcut on the desktop when asked.
 - Open "README.md" for usage instructions.
 
+### Note for Linux users
+
+Please make sure that your Python3 installation has the *tkinter* module. On Ubuntu, for example, it is not available out of the box and must be installed via a separate package. 
+
+------------------------------------------------------------------
 [Changelog](changelog)
 
 ## Usage, Options reference
