@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v1.0.3 Create backups
+
+- Create backups when overwriting files.
+
+Based on PyWriter v3.30.0
+
 ### v1.0.2 Support non-Windows OS
 
 - Move installation and configuration to another location (see instructions for use).

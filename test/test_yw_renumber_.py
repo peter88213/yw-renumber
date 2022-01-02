@@ -30,6 +30,7 @@ INI_WRITTEN = TEST_DATA_PATH + 'written.ini'
 
 # Test data
 TEST_YW7 = TEST_EXEC_PATH + 'yw7 Sample Project.yw7'
+TEST_YW7_BAK = TEST_YW7 + '.bak'
 TEST_INI = TEST_EXEC_PATH + 'yw-renumber.ini'
 
 
@@ -47,6 +48,12 @@ def remove_all_testfiles():
 
     try:
         os.remove(TEST_YW7)
+
+    except:
+        pass
+
+    try:
+        os.remove(TEST_YW7_BAK)
 
     except:
         pass
@@ -75,6 +82,7 @@ class NormalOperation(unittest.TestCase):
         os.chdir(TEST_EXEC_PATH)
         yw_renumber_.run(TEST_YW7, silentMode=True)
         self.assertEqual(read_file(TEST_YW7), read_file(DEFAULT_YW7))
+        self.assertEqual(read_file(TEST_YW7_BAK), read_file(NORMAL_YW7))
 
     def test_roman(self):
         copyfile(NORMAL_YW7, TEST_YW7)
@@ -82,6 +90,7 @@ class NormalOperation(unittest.TestCase):
         os.chdir(TEST_EXEC_PATH)
         yw_renumber_.run(TEST_YW7, silentMode=True, installDir=TEST_EXEC_PATH)
         self.assertEqual(read_file(TEST_YW7), read_file(ROMAN_YW7))
+        self.assertEqual(read_file(TEST_YW7_BAK), read_file(NORMAL_YW7))
 
     def test_written(self):
         copyfile(NORMAL_YW7, TEST_YW7)
@@ -89,6 +98,7 @@ class NormalOperation(unittest.TestCase):
         os.chdir(TEST_EXEC_PATH)
         yw_renumber_.run(TEST_YW7, silentMode=True, installDir=TEST_EXEC_PATH)
         self.assertEqual(read_file(TEST_YW7), read_file(WRITTEN_YW7))
+        self.assertEqual(read_file(TEST_YW7_BAK), read_file(NORMAL_YW7))
 
     def tearDown(self):
         remove_all_testfiles()
