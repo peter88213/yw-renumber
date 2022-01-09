@@ -58,7 +58,7 @@ You can safely delete this file at any time.
 
 ## Installation path
 
-The **install.bat** installation script installs *yw-renumber.pyw* in the user profile. This is the installation path on windows: 
+The setup script installs *yw-renumber.pyw* in the user profile. This is the installation path on windows: 
 
 `c:\Users\<user name>\.pywriter\yw-renumber`
 
