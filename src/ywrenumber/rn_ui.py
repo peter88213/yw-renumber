@@ -32,85 +32,80 @@ class RnUi(UiTk):
         self.root = Tk()
         self.root.title(title)
 
-        self.successInfo = Label(self.root)
-        self.successInfo.config(height=1, width=75)
-        self.processInfo = Label(self.root, text='')
-        self.appInfo = Label(self.root, text='')
-        self.appInfo.config(height=2, width=75)
-
-        self.hdTypes = Label(self.root, text='Chapters')
-        self.renParts = BooleanVar(value=kwargs['ren_parts'])
-        self.renUnused = BooleanVar(value=kwargs['ren_unused'])
-
-        self.hdOptions = Label(self.root, text='NumberingStyle')
-        self.numberingStyle = IntVar(value=kwargs['numberingStyle'])
-        self.numberingCase = IntVar(value=kwargs['numberingCase'])
-
-        self.hdAdd = Label(self.root, text='Add to number')
-        self.hdPrefix = Label(self.root, text='Prefix')
-        self.headingPrefix = StringVar(value=kwargs['headingPrefix'].replace('|', ''))
-        self.hdSuffix = Label(self.root, text='Suffix')
-        self.headingSuffix = StringVar(value=kwargs['headingSuffix'].replace('|', ''))
-
-        self.root.partsCheckbox = ttk.Checkbutton(
-            text='Include Section beginnings', variable=self.renParts, onvalue=True, offvalue=False)
-        self.root.unusedCheckbox = ttk.Checkbutton(
-            text='Include "unused" chapters', variable=self.renUnused, onvalue=True, offvalue=False)
-
-        self.root.arabicCheckbox = ttk.Radiobutton(text='Arabic numbers', variable=self.numberingStyle, value=0)
-        self.root.romanCheckbox = ttk.Radiobutton(text='Roman numbers', variable=self.numberingStyle, value=1)
-        self.root.englishCheckbox = ttk.Radiobutton(
-            text='Written out in English', variable=self.numberingStyle, value=2)
-
-        self.root.upcaseCheckbox = ttk.Radiobutton(text='Uppercase', variable=self.numberingCase, value=0)
-        self.root.capitalizeCheckbox = ttk.Radiobutton(text='Capitalized', variable=self.numberingCase, value=1)
-        self.root.lowercaseCheckbox = ttk.Radiobutton(text='Lowercase', variable=self.numberingCase, value=2)
-
-        self.root.prefixEntry = Entry(textvariable=self.headingPrefix)
-        self.root.suffixEntry = Entry(textvariable=self.headingSuffix)
-
-        self.root.selectButton = Button(text="Select file", command=self.select_file)
-        self.root.selectButton.config(height=1, width=20)
-
-        self.root.runButton = Button(text='Renumber chapters', command=self.convert_file)
-        self.root.runButton.config(height=1, width=20)
-        self.root.runButton.config(state='disabled')
-
-        self.root.quitButton = Button(text='Quit', command=self.stop)
-        self.root.quitButton.config(height=1, width=20)
+        #--- Row 1: Chapters (parts, unused)
 
         row1Cnt = 1
+        self.hdTypes = Label(self.root, text='Chapters')
         self.hdTypes.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+
         row1Cnt += 1
-        self.root.partsCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+        self.renParts = BooleanVar(value=kwargs['ren_parts'])
+        self.partsCheckbox = ttk.Checkbutton(
+            text='Include Section beginnings', variable=self.renParts, onvalue=True, offvalue=False)
+        self.partsCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+
         row1Cnt += 1
-        self.root.unusedCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+        self.renUnused = BooleanVar(value=kwargs['ren_unused'])
+        self.unusedCheckbox = ttk.Checkbutton(
+            self.root, text='Include "unused" chapters', variable=self.renUnused, onvalue=True, offvalue=False)
+        self.unusedCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+
+        #--- Row 2: Numbering style (numbers, case)
 
         row2Cnt = 1
+        self.hdOptions = Label(self.root, text='Numbering style')
         self.hdOptions.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+
         row2Cnt += 1
-        self.root.arabicCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.numberingStyle = IntVar(value=kwargs['numberingStyle'])
+        self.arabicCheckbox = ttk.Radiobutton(self.root, text='Arabic numbers', variable=self.numberingStyle, value=0)
+        self.arabicCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+
         row2Cnt += 1
-        self.root.romanCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.romanCheckbox = ttk.Radiobutton(self.root, text='Roman numbers', variable=self.numberingStyle, value=1)
+        self.romanCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+
         row2Cnt += 1
-        self.root.englishCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.englishCheckbox = ttk.Radiobutton(
+            self.root, text='Written out in English', variable=self.numberingStyle, value=2)
+        self.englishCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+
         row2Cnt += 1
-        self.root.upcaseCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.numberingCase = IntVar(value=kwargs['numberingCase'])
+        self.upcaseCheckbox = ttk.Radiobutton(self.root, text='Uppercase', variable=self.numberingCase, value=0)
+        self.upcaseCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+
         row2Cnt += 1
-        self.root.capitalizeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.capitalizeCheckbox = ttk.Radiobutton(self.root, text='Capitalized', variable=self.numberingCase, value=1)
+        self.capitalizeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+
         row2Cnt += 1
-        self.root.lowercaseCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.lowercaseCheckbox = ttk.Radiobutton(self.root, text='Lowercase', variable=self.numberingCase, value=2)
+        self.lowercaseCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+
+        #--- Row 3: "Add to number" (Prefix, Suffix)
 
         row3Cnt = 1
+        self.hdAdd = Label(self.root, text='Add to number')
         self.hdAdd.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+
         row3Cnt += 1
+        self.hdPrefix = Label(self.root, text='Prefix')
         self.hdPrefix.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+
         row3Cnt += 1
-        self.root.prefixEntry.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.headingPrefix = StringVar(value=kwargs['headingPrefix'].replace('|', ''))
+        self.prefixEntry = Entry(self.root, textvariable=self.headingPrefix)
+        self.prefixEntry.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+
         row3Cnt += 1
+        self.hdSuffix = Label(self.root, text='Suffix')
         self.hdSuffix.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+
         row3Cnt += 1
-        self.root.suffixEntry.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.headingSuffix = StringVar(value=kwargs['headingSuffix'].replace('|', ''))
+        self.suffixEntry = Entry(self.root, textvariable=self.headingSuffix)
+        self.suffixEntry.grid(row=row3Cnt, column=3, sticky=W, padx=20)
 
         if row3Cnt > row2Cnt:
             rowCnt = row3Cnt
@@ -122,17 +117,31 @@ class RnUi(UiTk):
             rowCnt = row1Cnt
 
         rowCnt += 1
+        self.appInfo = Label(self.root, text='')
+        self.appInfo.config(height=2, width=75)
         self.appInfo.grid(row=rowCnt, column=1, columnspan=3, pady=10)
 
         rowCnt += 1
-        self.root.selectButton.grid(row=rowCnt, column=1, padx=10, pady=10, sticky=W)
-        self.root.runButton.grid(row=rowCnt, column=2, padx=10, pady=10, sticky=E)
-        self.root.quitButton.grid(row=rowCnt, column=3, padx=10, pady=10, sticky=E)
+        self.selectButton = Button(self.root, text="Select file", command=self.select_file)
+        self.selectButton.config(height=1, width=20)
+        self.selectButton.grid(row=rowCnt, column=1, padx=10, pady=10, sticky=W)
+
+        self.runButton = Button(self.root, text='Renumber chapters', command=self.convert_file)
+        self.runButton.config(height=1, width=20)
+        self.runButton.config(state='disabled')
+        self.runButton.grid(row=rowCnt, column=2, padx=10, pady=10, sticky=E)
+
+        self.quitButton = Button(self.root, text='Quit', command=self.stop)
+        self.quitButton.config(height=1, width=20)
+        self.quitButton.grid(row=rowCnt, column=3, padx=10, pady=10, sticky=E)
 
         rowCnt += 1
+        self.successInfo = Label(self.root)
+        self.successInfo.config(height=1, width=75)
         self.successInfo.grid(row=rowCnt, column=1, columnspan=3)
 
         rowCnt += 1
+        self.processInfo = Label(self.root, text='')
         self.processInfo.grid(row=rowCnt, column=1, columnspan=3, pady=10)
 
         self.sourcePath = None
@@ -149,7 +158,7 @@ class RnUi(UiTk):
 
         if self.sourcePath is not None:
             self.set_info_what('File: ' + os.path.normpath(self.sourcePath))
-            self.root.runButton.config(state='normal')
+            self.runButton.config(state='normal')
 
         else:
             self._sourcePath = None
