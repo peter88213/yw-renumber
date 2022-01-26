@@ -4,6 +4,10 @@
 
 ## Changelog
 
+v1.2.0 GUI update
+
+Based on PyWriter v 4.0.0
+
 ### v1.0.3 Create backups
 
 - Create backups when overwriting files.
