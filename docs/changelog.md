@@ -4,7 +4,7 @@
 
 ## Changelog
 
-v1.2.0 GUI update
+### v1.2.0 GUI update
 
 Based on PyWriter v 4.0.0
 
