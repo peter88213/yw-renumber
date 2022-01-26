@@ -3,7 +3,7 @@
 Modules:
 
 yw_rn -- Provide a report generator class for yWriter projects.
-rn_ui -- Provide a Tkinter facade user interface class.
+yw_renumber_tk -- Provide a tkinter GUI class for yWriter chapter renumbering.
 
 Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw-reporter

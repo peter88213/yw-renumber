@@ -16,7 +16,7 @@ from pywriter.config.configuration import Configuration
 from pywriter.ui.ui import Ui
 
 from ywrenumber.yw_rn import YwRn
-from ywrenumber.rn_ui import RnUi
+from ywrenumber.yw_renumber_tk import YwRenumberTk
 
 
 SUFFIX = '_report'
@@ -64,8 +64,17 @@ def run(sourcePath, silentMode=True, installDir=''):
         converter.run(sourcePath, **kwargs)
 
     else:
-        converter.ui = RnUi('Renumber yWriter chapters @release', sourcePath=sourcePath, **kwargs)
+        converter.ui = YwRenumberTk('Renumber yWriter chapters @release', sourcePath=sourcePath, **kwargs)
         converter.ui.converter = converter
+
+        #--- Get initial project path.
+
+        if not sourcePath or not os.path.isfile(sourcePath):
+            sourcePath = kwargs['yw_last_open']
+
+        #--- Instantiate the viewer object.
+
+        converter.ui.open_project(sourcePath)
         converter.ui.start()
 
         #--- Save project specific configuration
