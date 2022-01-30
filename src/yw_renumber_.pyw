@@ -93,7 +93,8 @@ def run(sourcePath, silentMode=True, installDir=''):
 if __name__ == '__main__':
 
     try:
-        installDir = str(Path.home()).replace('\\', '/') + '/.pywriter/' + APPNAME + '/config/'
+        homeDir = str(Path.home()).replace('\\', '/')
+        installDir = f'{homeDir}/.pywriter/{APPNAME}/config/'
 
     except:
         installDir = ''
