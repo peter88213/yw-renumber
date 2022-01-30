@@ -8,8 +8,8 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 import tkinter as tk
 from tkinter import ttk
 
+from pywriter.pywriter_globals import ERROR
 from pywriter.yw.yw7_file import Yw7File
-
 from pywriter.ui.main_tk import MainTk
 
 
@@ -134,7 +134,7 @@ class YwRenumberTk(MainTk):
         self.ywPrj = Yw7File(fileName)
         message = self.ywPrj.read()
 
-        if message.startswith('ERROR'):
+        if message.startswith(ERROR):
             self.close_project()
             self.statusBar.config(text=message)
             return ''

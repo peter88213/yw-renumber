@@ -6,6 +6,7 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 """
 import os
 
+from pywriter.pywriter_globals import ERROR
 from pywriter.yw.yw7_file import Yw7File
 
 
@@ -105,7 +106,7 @@ class YwRn():
 
         message = source.read()
 
-        if message.startswith('ERROR'):
+        if message.startswith(ERROR):
             self.ui.set_info_how(message)
             return
 
