@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v1.4.0 Optional update
+
+- Rework the error messaging system.
+- Refactor.
+
+Based on PyWriter v5.0.0
+
 ### v1.2.0 GUI update
 
 Based on PyWriter v 4.0.0

@@ -94,12 +94,12 @@ class YwRn():
 
         if not fileExtension == Yw7File.EXTENSION:
             self.ui.set_info_how(
-                'ERROR: File "' + os.path.normpath(sourcePath) + '" is not a yWriter 7 project.')
+                f'{ERROR}File "{os.path.normpath(sourcePath)}" is not a yWriter 7 project.')
             return
 
         if not os.path.isfile(sourcePath):
             self.ui.set_info_how(
-                'ERROR: File "' + os.path.normpath(sourcePath) + '" not found.')
+                f'{ERROR}File "{os.path.normpath(sourcePath)}" not found.')
             return
 
         source = Yw7File(sourcePath, **kwargs)
