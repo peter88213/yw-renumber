@@ -136,7 +136,7 @@ class YwRenumberTk(MainTk):
 
         if message.startswith(ERROR):
             self.close_project()
-            self.statusBar.config(text=message)
+            self.set_info_how(message)
             return ''
 
         if self.ywPrj.title:
@@ -168,12 +168,3 @@ class YwRenumberTk(MainTk):
             headingSuffix='|' + self.headingSuffix.get() + '|',
         )
         self.converter.run(self.ywPrj.filePath, **self.kwargs)
-
-    def set_info_what(self, message):
-        """What's the converter going to do?
-        Just a stub here.
-        """
-
-    def set_info_how(self, message):
-        """How's the converter doing?"""
-        self.statusBar.config(text=message)
