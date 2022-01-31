@@ -15,7 +15,7 @@ import inliner
 SRC = '../src/'
 BUILD = '../test/'
 SOURCE_FILE_GUI = 'yw_renumber_.pyw'
-TARGET_FILE_GUI = BUILD + 'yw_renumber.pyw'
+TARGET_FILE_GUI = f'{BUILD}yw_renumber.pyw'
 
 
 def main():

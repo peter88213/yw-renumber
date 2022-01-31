@@ -48,7 +48,7 @@ def run(sourcePath, silentMode=True, installDir=''):
     else:
         sourceDir += '/'
 
-    iniFile = installDir + APPNAME + '.ini'
+    iniFile = f'{installDir}{APPNAME}.ini'
     configuration = Configuration(SETTINGS, OPTIONS)
     configuration.read(iniFile)
     kwargs = dict(

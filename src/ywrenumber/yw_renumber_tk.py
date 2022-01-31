@@ -151,7 +151,7 @@ class YwRenumberTk(MainTk):
         else:
             authorView = 'Unknown author'
 
-        self.titleBar.config(text=titleView + ' by ' + authorView)
+        self.titleBar.config(text=f'{titleView} by {authorView}')
         self.enable_menu()
         return fileName
 
@@ -164,7 +164,7 @@ class YwRenumberTk(MainTk):
             ren_unused=self.renUnused.get(),
             numberingStyle=str(self.numberingStyle.get()),
             numberingCase=str(self.numberingCase.get()),
-            headingPrefix='|' + self.headingPrefix.get() + '|',
-            headingSuffix='|' + self.headingSuffix.get() + '|',
+            headingPrefix=f'|{self.headingPrefix.get()}|',
+            headingSuffix=f'|{self.headingSuffix.get()}|',
         )
         self.converter.run(self.ywPrj.filePath, **self.kwargs)

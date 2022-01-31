@@ -75,16 +75,16 @@ class YwRn():
                 return TENS[n]
 
             elif n < 100:
-                return number_to_english(n - (n % 10)) + ' ' + number_to_english(n % 10)
+                return f'{number_to_english(n - (n % 10))} {number_to_english(n % 10)}'
 
             elif n < 1000 and n % 100 == 0:
-                return number_to_english(n / 100) + ' hundred'
+                return f'{number_to_english(n / 100)} hundred'
 
             elif n < 1000:
-                return number_to_english(n / 100) + ' hundred ' + number_to_english(n % 100)
+                return f'{number_to_english(n / 100)} hundred {number_to_english(n % 100)}'
 
             elif n < 1000000:
-                return number_to_english(n / 1000) + ' thousand ' + number_to_english(n % 1000)
+                return f'{number_to_english(n / 1000)} thousand {number_to_english(n % 1000)}'
 
             return ''
 
