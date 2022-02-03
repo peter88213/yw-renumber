@@ -2,7 +2,7 @@
 """Renumber yWriter chapters. 
 
 Version @release
-
+Requires Python 3.6+
 Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw-renumber
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)

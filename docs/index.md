@@ -12,7 +12,7 @@ The *yw-renumber* script has a graphical user interface. However, a Python 3 ins
 
 ## Requirements
 
-- [Python 3](https://www.python.org). Python 3.4 or more recent will work.
+- [Python 3.6+](https://www.python.org). 
 
 ## Download and install
 
