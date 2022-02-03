@@ -24,10 +24,10 @@ APPNAME = 'yw-renumber'
 
 SETTINGS = dict(
     yw_last_open='',
-    numberingStyle='0',
-    numberingCase='0',
-    headingPrefix='||',
-    headingSuffix='||',
+    numbering_style='0',
+    numbering_case='0',
+    heading_prefix='||',
+    heading_suffix='||',
 )
 
 OPTIONS = dict(
@@ -64,7 +64,7 @@ def run(sourcePath, silentMode=True, installDir=''):
         converter.run(sourcePath, **kwargs)
 
     else:
-        converter.ui = YwRenumberTk('Renumber yWriter chapters @release', sourcePath=sourcePath, **kwargs)
+        converter.ui = YwRenumberTk('Renumber yWriter chapters @release', **kwargs)
         converter.ui.converter = converter
 
         #--- Get initial project path.

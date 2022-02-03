@@ -6,8 +6,9 @@
 
 ### v1.4.0 Optional update
 
-- Rework the error messaging system.
-- Refactor.
+- Change the GUI.
+- Rename config file entries.
+- Refactor the code.
 
 Based on PyWriter v5.0.0
 
