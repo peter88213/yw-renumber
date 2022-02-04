@@ -90,7 +90,7 @@ class YwRn():
 
         self.newFile = None
 
-        fileName, fileExtension = os.path.splitext(sourcePath)
+        __, fileExtension = os.path.splitext(sourcePath)
 
         if not fileExtension == Yw7File.EXTENSION:
             self.ui.set_info_how(
