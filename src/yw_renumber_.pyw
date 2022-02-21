@@ -15,8 +15,8 @@ from pathlib import Path
 from pywriter.config.configuration import Configuration
 from pywriter.ui.ui import Ui
 
-from ywrenumber.yw_rn import YwRn
-from ywrenumber.yw_renumber_tk import YwRenumberTk
+from ywrenumberlib.yw_rn import YwRn
+from ywrenumberlib.yw_renumber_tk import YwRenumberTk
 
 
 SUFFIX = '_report'

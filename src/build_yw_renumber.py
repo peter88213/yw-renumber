@@ -21,7 +21,7 @@ TARGET_FILE = f'{BUILD}yw_renumber.pyw'
 
 
 def main():
-    inliner.run(SOURCE_FILE, TARGET_FILE, 'ywrenumber', '../src/')
+    inliner.run(SOURCE_FILE, TARGET_FILE, 'ywrenumberlib', '../src/')
     inliner.run(TARGET_FILE, TARGET_FILE, 'pywriter', '../../PyWriter/src/')
     print('Done.')
 
