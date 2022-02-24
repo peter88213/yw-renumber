@@ -4,7 +4,7 @@
 
 ## Changelog
 
-### v2.0.0 Optional update
+### v2.0.0
 
 - Change the GUI.
 - Rename config file entries.
