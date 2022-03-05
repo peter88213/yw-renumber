@@ -5,20 +5,38 @@ For further information see https://github.com/peter88213/yw-renumber
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
-
 from pywriter.pywriter_globals import ERROR
 from pywriter.yw.yw7_file import Yw7File
 
 
 class YwRn():
-    """Renumber chapters."""
+    """Renumber chapters.
+    
+    Public methods:
+        run(sourcePath, **kwargs) -- Modify chapter headings.
+        
+    Public instance variables:
+        ui -- Ui or YwRenumberTk instance: user interface.
+    """
 
     def __init__(self):
         """Define instance variables."""
         self.ui = None
 
     def run(self, sourcePath, **kwargs):
-
+        """Modify chapter headings.
+        
+        Positional arguments:
+            sourcePath -- str: path to the yWriter project file.
+        
+        Required keyword arguments:
+            ren_unused -- bool: include chapters marked "Unused" in yWriter.
+            ren_parts -- bool: include chapters marked "This chapter begins a new section" in yWriter.
+            numbering_style -- str: '0'=Arabic numbers; '1'= Roman numbers; '2'= Written out in English.
+            numbering_case -- str: '0'=Uppercase; '1'=Capitalized; '2'=Lowercase.
+            heading_prefix -- str: a string preceding each number.
+            heading_suffix -- str: a string following each number.
+        """
         ROMAN = [
             (1000, "m"),
             (900, "cm"),
@@ -37,16 +55,14 @@ class YwRn():
 
         def number_to_roman(n):
             """Return n as a Roman number.
+            
             Credit goes to the user 'Aristide' on stack overflow.
             https://stackoverflow.com/a/47713392
             """
-
             result = []
-
             for (arabic, roman) in ROMAN:
                 (factor, n) = divmod(n, arabic)
                 result.append(roman * factor)
-
                 if n == 0:
                     break
 
@@ -61,37 +77,28 @@ class YwRn():
 
         def number_to_english(n):
             """Return n as a number written out in English.
+            
             Credit goes to the user 'Hunter_71' on stack overflow.
             https://stackoverflow.com/a/51849443
             """
-
             if any(not x.isdigit() for x in str(n)):
                 return ''
-
             if n <= 20:
                 return ZERO_TO_TWENTY[n]
-
             elif n < 100 and n % 10 == 0:
                 return TENS[n]
-
             elif n < 100:
                 return f'{number_to_english(n - (n % 10))} {number_to_english(n % 10)}'
-
             elif n < 1000 and n % 100 == 0:
                 return f'{number_to_english(n / 100)} hundred'
-
             elif n < 1000:
                 return f'{number_to_english(n / 100)} hundred {number_to_english(n % 100)}'
-
             elif n < 1000000:
                 return f'{number_to_english(n / 1000)} thousand {number_to_english(n % 1000)}'
-
             return ''
 
         self.newFile = None
-
         __, fileExtension = os.path.splitext(sourcePath)
-
         if not fileExtension == Yw7File.EXTENSION:
             self.ui.set_info_how(
                 f'{ERROR}File "{os.path.normpath(sourcePath)}" is not a yWriter 7 project.')
@@ -103,19 +110,14 @@ class YwRn():
             return
 
         source = Yw7File(sourcePath, **kwargs)
-
         message = source.read()
-
         if message.startswith(ERROR):
             self.ui.set_info_how(message)
             return
 
         i = 0
-
         for chId in source.srtChapters:
-
             if source.chapters[chId].isUnused:
-
                 if not kwargs['ren_unused']:
                     continue
 
@@ -123,31 +125,23 @@ class YwRn():
                 continue
 
             if source.chapters[chId].chLevel == 1:
-
                 if not kwargs['ren_parts']:
                     continue
 
             if source.chapters[chId].chType == 0 or source.chapters[chId].oldType == 0:
                 i += 1
-
                 if kwargs['numbering_style'] == '1':
                     number = number_to_roman(i)
-
                 elif kwargs['numbering_style'] == '2':
                     number = number_to_english(i)
-
                 else:
                     number = str(i)
-
                 if kwargs['numbering_case'] == '0':
                     number = number.upper()
-
                 elif kwargs['numbering_case'] == '1':
                     number = number.capitalize()
-
                 source.chapters[chId].title = kwargs['heading_prefix'].replace(
                     '|', '') + number + kwargs['heading_suffix'].replace('|', '')
-
         message = source.write()
         self.ui.set_info_how(message)
         return
