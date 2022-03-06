@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.0.1
+
+- Improve code and documentation quality.
+
+Based on PyWriter v5.0.3
+
 ### v2.0.0
 
 - Change the GUI.
