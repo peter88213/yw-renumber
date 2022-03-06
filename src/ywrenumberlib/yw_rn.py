@@ -20,7 +20,7 @@ class YwRn():
     """
 
     def __init__(self):
-        """Define instance variables."""
+        """Initialize instance variables."""
         self.ui = None
 
     def run(self, sourcePath, **kwargs):

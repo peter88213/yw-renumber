@@ -17,18 +17,21 @@ class YwRenumberTk(MainTk):
     
     Public methods:
         open_project(fileName) -- create a yWriter project instance and read the file.
-
-    Required keyword arguments:
-        ren_unused -- bool: include chapters marked "Unused" in yWriter.
-        ren_parts -- bool: include chapters marked "This chapter begins a new section" in yWriter.
-        numbering_style -- str: '0'=Arabic numbers; '1'= Roman numbers; '2'= Written out in English.
-        numbering_case -- str: '0'=Uppercase; '1'=Capitalized; '2'=Lowercase.
-        heading_prefix -- str: a string preceding each number.
-        heading_suffix -- str: a string following each number.
     """
 
     def __init__(self, title, **kwargs):
         """Add widgets for options and settings to the GUI main window.
+        
+        Positional argument:
+            title -- application title to be displayed at the window frame.
+
+        Required keyword arguments:
+            ren_unused -- bool: include chapters marked "Unused" in yWriter.
+            ren_parts -- bool: include chapters marked "This chapter begins a new section" in yWriter.
+            numbering_style -- str: '0'=Arabic numbers; '1'= Roman numbers; '2'= Written out in English.
+            numbering_case -- str: '0'=Uppercase; '1'=Capitalized; '2'=Lowercase.
+            heading_prefix -- str: a string preceding each number.
+            heading_suffix -- str: a string following each number.
         
         Get the keyword arguments for widget initialization.
         Extends the superclass constructor.
