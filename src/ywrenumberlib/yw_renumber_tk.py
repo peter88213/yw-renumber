@@ -99,11 +99,12 @@ class YwRenumberTk(MainTk):
         suffixEntry = tk.Entry(self._mainWindow, textvariable=self._headingSuffix)
         suffixEntry.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
-    def _extend_menu(self):
+    def _build_main_menu(self):
         """Add main menu entries.
         
-        Overrides the superclass template method. 
+        Extends the superclass template method. 
         """
+        super()._build_main_menu()
         self._mainMenu.add_command(label='Renumber chapters', command=self._convert_file)
         self._mainMenu.entryconfig('Renumber chapters', state='disabled')
 
@@ -152,7 +153,7 @@ class YwRenumberTk(MainTk):
             authorView = self._ywPrj.authorName
         else:
             authorView = 'Unknown author'
-        self._titleBar.config(text=f'{titleView} by {authorView}')
+        self._root.title(f'{titleView} by {authorView} - {self._title}')
         self._enable_menu()
         return fileName
 
@@ -168,5 +169,5 @@ class YwRenumberTk(MainTk):
         self.kwargs['numbering_style'] = str(self._numberingStyle.get())
         self.kwargs['numbering_case'] = str(self._numberingCase.get())
         self.kwargs['heading_prefix'] = f'|{self._headingPrefix.get()}|'
-        self.kwargs['heading_suffix'] = f'|{self._headingSuffix.get()}|'       
+        self.kwargs['heading_suffix'] = f'|{self._headingSuffix.get()}|'
         self.converter.run(self._ywPrj.filePath, **self.kwargs)

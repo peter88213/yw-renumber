@@ -17,8 +17,27 @@ You can either
 
 The style options are set by ticking checkboxes and filling out forms. On program startup, the latest options selected are preset.
 
-When the yWriter project is selected and the options are set, you can launch the renumbering with **Renumber chapter**. The new chapter titles are written directly into the yWriter project file. If the project is open in yWriter, you will be asked to exit yWriter first.
 
+
+### Operation
+
+#### Open a yWriter project
+
+- If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **File > Open** or **Ctrl-o***.
+
+#### Start renumbering
+
+- When the yWriter project is selected and the options are set, you can launch the renumbering with **Renumber chapter**. The new chapter titles are written directly into the yWriter project file.
+- If the project is open in yWriter, you will be asked to exit yWriter first.
+
+#### Close the ywriter project
+
+- You can close the project without exiting the program with **File > Close**.
+- If you open another project, the current project is automatically closed.
+
+#### Exit 
+
+- You can exit with **File > Exit** of **Ctrl-q**.
 
 ### Options
 
