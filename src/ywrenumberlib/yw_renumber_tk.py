@@ -13,11 +13,7 @@ from pywriter.ui.main_tk import MainTk
 
 
 class YwRenumberTk(MainTk):
-    """A tkinter GUI class for yWriter chapter renumbering.
-    
-    Public methods:
-        open_project(fileName) -- create a yWriter project instance and read the file.
-    """
+    """A tkinter GUI class for yWriter chapter renumbering."""
 
     def __init__(self, title, **kwargs):
         """Add widgets for options and settings to the GUI main window.
@@ -123,39 +119,6 @@ class YwRenumberTk(MainTk):
         """
         super()._enable_menu()
         self._mainMenu.entryconfig('Renumber chapters', state='normal')
-
-    def open_project(self, fileName):
-        """Create a yWriter project instance and read the file.
-        
-        Positional arguments:
-            fileName -- str: path to the yWriter project file.
-        
-        Display project title, description and status.
-        Return the file name.
-        Extends the superclass method.
-        """
-        fileName = super().open_project(fileName)
-        if not fileName:
-            return ''
-
-        self._ywPrj = Yw7File(fileName)
-        message = self._ywPrj.read()
-        if message.startswith(ERROR):
-            self.close_project()
-            self.set_info_how(message)
-            return ''
-
-        if self._ywPrj.title:
-            titleView = self._ywPrj.title
-        else:
-            titleView = 'Untitled yWriter project'
-        if self._ywPrj.authorName:
-            authorView = self._ywPrj.authorName
-        else:
-            authorView = 'Unknown author'
-        self._root.title(f'{titleView} by {authorView} - {self._title}')
-        self._enable_menu()
-        return fileName
 
     def _convert_file(self):
         """Call the converter's conversion method.
