@@ -27,7 +27,7 @@ The style options are set by ticking checkboxes and filling out forms. On progra
 
 #### Start renumbering
 
-- When the yWriter project is selected and the options are set, you can launch the renumbering with **Renumber chapter**. The new chapter titles are written directly into the yWriter project file.
+- When the yWriter project is selected and the options are set, you can launch the renumbering with **Renumber chapters** *(Alt-R)*. The new chapter titles are written directly into the yWriter project file.
 - If the project is open in yWriter, you will be asked to exit yWriter first.
 
 #### Close the ywriter project

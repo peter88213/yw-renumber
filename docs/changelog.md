@@ -9,6 +9,7 @@
 - Add shortcuts:
     - Ctrl-o to open.
     - Ctrl-q to exit.
+- Enable menu shortcuts.
 - Display document title on the window frame.
 - Save and restore window size and position.
 
