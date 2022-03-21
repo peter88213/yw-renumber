@@ -126,11 +126,11 @@ class YwRenumberTk(MainTk):
         Write selected options and settings to the keyword arguments.
         Overrides the superclass method.
         """
-        self.kwargs['yw_last_open'] = self._ywPrj.filePath
+        self.kwargs['yw_last_open'] = self.ywPrj.filePath
         self.kwargs['ren_parts'] = self._renParts.get()
         self.kwargs['ren_unused'] = self._renUnused.get()
         self.kwargs['numbering_style'] = str(self._numberingStyle.get())
         self.kwargs['numbering_case'] = str(self._numberingCase.get())
         self.kwargs['heading_prefix'] = f'|{self._headingPrefix.get()}|'
         self.kwargs['heading_suffix'] = f'|{self._headingSuffix.get()}|'
-        self.converter.run(self._ywPrj.filePath, **self.kwargs)
+        self.converter.run(self.ywPrj.filePath, **self.kwargs)
