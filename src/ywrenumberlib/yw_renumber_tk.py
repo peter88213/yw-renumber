@@ -5,8 +5,6 @@ Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw-renumber
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
-import tkinter as tk
-from tkinter import ttk
 from pywriter.ui.main_tk import MainTk
 from ywrenumberlib.config_renumber import ConfigRenumber
 
@@ -14,18 +12,19 @@ from ywrenumberlib.config_renumber import ConfigRenumber
 class YwRenumberTk(MainTk):
     """A tkinter GUI class for yWriter chapter renumbering."""
 
-    def __init__(self, title, **kwargs):
+    def __init__(self, title, converter, **kwargs):
         """Add widgets for options and settings to the GUI main window.
         
         Positional arguments:
-            title -- application title to be displayed at the window frame.
+            title -- Application title to be displayed at the window frame.
+            converter -- Reference to the YwRn instance.
 
         optional arguments:
             kwargs -- Keyword argument dictionary containing the configuration.
         Extends the superclass constructor.
         """
         super().__init__(title, **kwargs)
-        self.converter = None
+        self.converter = converter
         self._configurator = ConfigRenumber()
         self._configurator.show_configuration(self._mainWindow, kwargs)
 

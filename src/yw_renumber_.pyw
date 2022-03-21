@@ -48,8 +48,7 @@ def run(sourcePath, silentMode=True, installDir='.'):
         converter.ui = Ui('')
         converter.run(sourcePath, **kwargs)
     else:
-        converter.ui = YwRenumberTk('Renumber yWriter chapters @release', **kwargs)
-        converter.ui.converter = converter
+        converter.ui = YwRenumberTk('Renumber yWriter chapters @release', converter, **kwargs)
 
         #--- Get initial project path.
         if not sourcePath or not os.path.isfile(sourcePath):

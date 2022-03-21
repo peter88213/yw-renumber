@@ -12,6 +12,7 @@
 - Enable menu shortcuts.
 - Display document title on the window frame.
 - Save and restore window size and position.
+- Save the settings on exit, even if no run has taken place..
 
 Based on PyWriter v5.2.0
 
