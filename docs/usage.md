@@ -23,7 +23,7 @@ The style options are set by ticking checkboxes and filling out forms. On progra
 
 #### Open a yWriter project
 
-- If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **File > Open** or **Ctrl-o***.
+- If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **File > Open** or **Ctrl-O***.
 
 #### Start renumbering
 
@@ -37,7 +37,7 @@ The style options are set by ticking checkboxes and filling out forms. On progra
 
 #### Exit 
 
-- You can exit with **File > Exit** of **Ctrl-q**.
+- You can exit with **File > Exit** or **Ctrl-Q**.
 
 ### Options
 
@@ -45,9 +45,10 @@ The style options are set by ticking checkboxes and filling out forms. On progra
 
 By default, all normal chapters are renumbered, which are displayed in thin green text in the yWriter chapter list. If you wish to exclude chapters from the numbering, you can change temporarily their type to *"ToDo"* or *"Notes"*, or mark them temporarily *"unused"*. Another option is to mark them as *section beginnings* (see below).
 
-- **Include Section beginnings** -- Include chapters marked *"This chapter begins a new section"* in the yWriter chapter dialog.
+- **Include section beginnings** -- Include parts (chapters marked *"This chapter begins a new section"* in the yWriter chapter dialog).
 - **Include "unused" chapters** -- Include chapters marked *"Unused"* in yWriter.
 - **Begin at "start of novel"** -- Start renumbering with the chapter marked as *start of novel* in yWriter.
+- **Reset number after section beginnings** -- Reset the chapter number when a new part begins.
 
 #### Styles
 

@@ -7,6 +7,7 @@
 ### v2.4.0
 
 - Add option 'Start numbering with the chapter marked as "start of novel" in yWriter'.
+- Add option 'Reset the chapter number when a new part begins'.
 
 Based on PyWriter v5.4.0
 

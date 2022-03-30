@@ -33,6 +33,7 @@ class YwRn():
             ren_unused -- bool: include chapters marked "Unused" in yWriter.
             ren_parts -- bool: include chapters marked "This chapter begins a new section" in yWriter.
             consider_novel_start -- bool: start numbering with the chapter marked as "start of novel" in yWriter.
+            renumber_within_parts -- bool: Reset the chapter number after section beginnings.
             numbering_style -- str: '0'=Arabic numbers; '1'= Roman numbers; '2'= Written out in English.
             numbering_case -- str: '0'=Uppercase; '1'=Capitalized; '2'=Lowercase.
             heading_prefix -- str: a string preceding each number.
@@ -137,6 +138,8 @@ class YwRn():
                 continue
 
             if source.chapters[chId].chLevel == 1:
+                if kwargs['renumber_within_parts']:
+                    i = 0
                 if not kwargs['ren_parts']:
                     continue
 

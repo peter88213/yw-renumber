@@ -30,6 +30,7 @@ OPTIONS = dict(
     ren_unused=False,
     ren_parts=False,
     consider_novel_start=True,
+    renumber_within_parts=False,
 )
 
 

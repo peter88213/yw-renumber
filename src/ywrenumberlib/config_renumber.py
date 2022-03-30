@@ -27,6 +27,7 @@ class ConfigRenumber:
             ren_unused -- bool: include chapters marked "Unused" in yWriter.
             ren_parts -- bool: include chapters marked "This chapter begins a new section" in yWriter.
             consider_novel_start -- bool: start numbering with the chapter marked as "start of novel" in yWriter.
+            renumber_within_parts -- bool: Reset the chapter number after section beginnings.
             numbering_style -- str: '0'=Arabic numbers; '1'= Roman numbers; '2'= Written out in English.
             numbering_case -- str: '0'=Uppercase; '1'=Capitalized; '2'=Lowercase.
             heading_prefix -- str: a string preceding each number.
@@ -38,7 +39,7 @@ class ConfigRenumber:
         hdTypes.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
         row1Cnt += 1
         self._renParts = tk.BooleanVar(value=kwargs['ren_parts'])
-        partsCheckbox = ttk.Checkbutton(window, text='Include Section beginnings',
+        partsCheckbox = ttk.Checkbutton(window, text='Include section beginnings',
                                         variable=self._renParts, onvalue=True, offvalue=False)
         partsCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
         row1Cnt += 1
@@ -51,6 +52,11 @@ class ConfigRenumber:
         startCheckbox = ttk.Checkbutton(window, text='Begin at "start of novel"',
                                          variable=self._considerStart, onvalue=True, offvalue=False)
         startCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
+        row1Cnt += 1
+        self._partWise = tk.BooleanVar(value=kwargs['renumber_within_parts'])
+        partWiseCheckbox = ttk.Checkbutton(window, text='Reset number after section beginnings',
+                                         variable=self._partWise, onvalue=True, offvalue=False)
+        partWiseCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
 
         #--- Row 2: Numbering style (numbers, case)
         row2Cnt = 1
@@ -106,6 +112,7 @@ class ConfigRenumber:
         kwargs['ren_parts'] = self._renParts.get()
         kwargs['ren_unused'] = self._renUnused.get()
         kwargs['consider_novel_start'] = self._considerStart.get()
+        kwargs['renumber_within_parts'] = self._partWise.get()
         kwargs['numbering_style'] = str(self._numberingStyle.get())
         kwargs['numbering_case'] = str(self._numberingCase.get())
         kwargs['heading_prefix'] = f'|{self._headingPrefix.get()}|'
