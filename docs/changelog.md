@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.4.0
+
+- Add option 'Start numbering with the chapter marked as "start of novel" in yWriter'.
+
+Based on PyWriter v5.4.0
+
 ### v2.2.0
 
 - Add shortcuts:

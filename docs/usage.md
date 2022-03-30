@@ -47,6 +47,7 @@ By default, all normal chapters are renumbered, which are displayed in thin gree
 
 - **Include Section beginnings** -- Include chapters marked *"This chapter begins a new section"* in the yWriter chapter dialog.
 - **Include "unused" chapters** -- Include chapters marked *"Unused"* in yWriter.
+- **Begin at "start of novel"** -- Start renumbering with the chapter marked as *start of novel* in yWriter.
 
 #### Styles
 
