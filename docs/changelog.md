@@ -9,7 +9,7 @@
 - Add option 'Include regular chapters'.
 - Add option 'Reset number after section beginnings'.
 
-Based on PyWriter v5.2.0
+Based on PyWriter v5.2.1
 
 ### v2.2.0
 
