@@ -27,10 +27,10 @@ SETTINGS = dict(
     heading_suffix='||',
 )
 OPTIONS = dict(
+    ren_regular=True,
     ren_unused=False,
     ren_parts=False,
-    consider_novel_start=True,
-    renumber_within_parts=False,
+    ren_within_parts=False,
 )
 
 

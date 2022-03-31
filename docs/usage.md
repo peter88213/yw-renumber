@@ -45,9 +45,9 @@ The style options are set by ticking checkboxes and filling out forms. On progra
 
 By default, all normal chapters are renumbered, which are displayed in thin green text in the yWriter chapter list. If you wish to exclude chapters from the numbering, you can change temporarily their type to *"ToDo"* or *"Notes"*, or mark them temporarily *"unused"*. Another option is to mark them as *section beginnings* (see below).
 
+- **Include regular chapters** -- Include chapters that don't begin a new section.
 - **Include section beginnings** -- Include parts (chapters marked *"This chapter begins a new section"* in the yWriter chapter dialog).
 - **Include "unused" chapters** -- Include chapters marked *"Unused"* in yWriter.
-- **Begin at "start of novel"** -- Start renumbering with the chapter marked as *start of novel* in yWriter.
 - **Reset number after section beginnings** -- Reset the chapter number when a new part begins.
 
 #### Styles

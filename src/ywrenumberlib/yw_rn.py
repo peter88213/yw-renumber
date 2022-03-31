@@ -30,10 +30,10 @@ class YwRn():
             sourcePath -- str: path to the yWriter project file.
         
         Required keyword arguments:
+            ren_regular -- bool: include regular chapters.
             ren_unused -- bool: include chapters marked "Unused" in yWriter.
             ren_parts -- bool: include chapters marked "This chapter begins a new section" in yWriter.
-            consider_novel_start -- bool: start numbering with the chapter marked as "start of novel" in yWriter.
-            renumber_within_parts -- bool: Reset the chapter number after section beginnings.
+            ren_within_parts -- bool: Reset the chapter number after section beginnings.
             numbering_style -- str: '0'=Arabic numbers; '1'= Roman numbers; '2'= Written out in English.
             numbering_case -- str: '0'=Uppercase; '1'=Capitalized; '2'=Lowercase.
             heading_prefix -- str: a string preceding each number.
@@ -117,19 +117,8 @@ class YwRn():
             self.ui.set_info_how(message)
             return
 
-        if kwargs['consider_novel_start'] and source.firstNumberedChapter is not None:
-            # Do not renumber chapters before the "first numbered" one.
-            doCount = False
-        else:
-            # Start renumbering right from the beginning.
-            doCount = True
         i = 0
         for chId in source.srtChapters:
-            if chId == source.firstNumberedChapter:
-                doCount = True
-            if not doCount:
-                continue
-
             if source.chapters[chId].isUnused:
                 if not kwargs['ren_unused']:
                     continue
@@ -137,8 +126,14 @@ class YwRn():
             if source.chapters[chId].isTrash:
                 continue
 
-            if source.chapters[chId].chLevel == 1:
-                if kwargs['renumber_within_parts']:
+            if source.chapters[chId].chLevel == 0:
+                # Regular chapter
+                if not kwargs['ren_regular']:
+                    continue
+
+            else:
+                # Part (chapter "beginning a new section")
+                if kwargs['ren_within_parts']:
                     i = 0
                 if not kwargs['ren_parts']:
                     continue
