@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.4.1 Optional update
+
+- Refactor the code.
+
+Based on PyWriter v5.6.0
+
 ### v2.4.0
 
 - Add option 'Include regular chapters'.

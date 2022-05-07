@@ -26,7 +26,7 @@ class YwRenumberTk(MainTk):
         super().__init__(title, **kwargs)
         self.converter = converter
         self._configurator = ConfigRenumber()
-        self._configurator.show_configuration(self._mainWindow, kwargs)
+        self._configurator.show_configuration(self.mainWindow, kwargs)
 
     def _build_main_menu(self):
         """Add main menu entries.
@@ -34,26 +34,26 @@ class YwRenumberTk(MainTk):
         Extends the superclass template method. 
         """
         super()._build_main_menu()
-        self._mainMenu.add_command(label='Renumber chapters', command=self._convert_file)
-        self._mainMenu.entryconfig('Renumber chapters', state='disabled')
+        self.mainMenu.add_command(label='Renumber chapters', command=self.convert_file)
+        self.mainMenu.entryconfig('Renumber chapters', state='disabled')
 
-    def _disable_menu(self):
+    def disable_menu(self):
         """Disable menu entries when no project is open.
         
         Extends the superclass method.      
         """
-        super()._disable_menu()
-        self._mainMenu.entryconfig('Renumber chapters', state='disabled')
+        super().disable_menu()
+        self.mainMenu.entryconfig('Renumber chapters', state='disabled')
 
-    def _enable_menu(self):
+    def enable_menu(self):
         """Enable menu entries when a project is open.
         
         Extends the superclass method.
         """
-        super()._enable_menu()
-        self._mainMenu.entryconfig('Renumber chapters', state='normal')
+        super().enable_menu()
+        self.mainMenu.entryconfig('Renumber chapters', state='normal')
 
-    def _convert_file(self):
+    def convert_file(self):
         """Call the converter's conversion method.
         
         Write selected options and settings to the keyword arguments.
