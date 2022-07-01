@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.4.3 Improved word counting
+
+- Fix word counting considering ellipses.
+
+Based on PyWriter v5.12.4
+
 ### v2.4.2 Improved word counting
 
 - Fix word counting considering comments, hyphens, and dashes.
