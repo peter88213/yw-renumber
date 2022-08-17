@@ -138,7 +138,7 @@ class YwRn():
                 if not kwargs['ren_parts']:
                     continue
 
-            if source.chapters[chId].chType == 0 or source.chapters[chId].oldType == 0:
+            if source.chapters[chId].chType == 0:
                 i += 1
                 if kwargs['numbering_style'] == '1':
                     number = number_to_roman(i)
