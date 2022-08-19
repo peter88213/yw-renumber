@@ -119,7 +119,7 @@ class YwRn():
 
         i = 0
         for chId in source.srtChapters:
-            if source.chapters[chId].isUnused:
+            if source.chapters[chId].chType == 3:
                 if not kwargs['ren_unused']:
                     continue
 
