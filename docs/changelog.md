@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.4.6 Optional release
+
+- Code refactoring and library update.
+
+Based on PyWriter v7.2.1
+
 ### v2.4.5 Update setup script
 
 - Change the working dir to the script dir on startup in order to avoid "file not found" error.
