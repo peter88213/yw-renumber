@@ -46,19 +46,14 @@ def read_file(inputFile):
 
 
 def remove_all_testfiles():
-
     try:
         os.remove(TEST_YW7)
-
     except:
         pass
-
     try:
         os.remove(TEST_YW7_BAK)
-
     except:
         pass
-
     try:
         os.remove(TEST_INI)
     except:
@@ -69,13 +64,10 @@ class NormalOperation(unittest.TestCase):
     """Test case: Normal operation."""
 
     def setUp(self):
-
         try:
             os.mkdir(TEST_EXEC_PATH)
-
         except:
             pass
-
         remove_all_testfiles()
 
     def test_defaults(self):
