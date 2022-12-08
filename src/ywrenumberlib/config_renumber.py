@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """"Provide a tkinter configurator dialog for chapter renumbering.
 
 Copyright (c) 2022 Peter Triesberger
