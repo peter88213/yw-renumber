@@ -1,7 +1,6 @@
-""" Regression test for the yw_renumber project.
+"""Regression test for the yw_renumber project.
 
-Test suite for yw_renumber.pyw.
-
+Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/yw-renumber
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
