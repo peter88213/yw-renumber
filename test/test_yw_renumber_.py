@@ -1,4 +1,4 @@
-""" Python unit tests for the yw_renumber project.
+""" Regression test for the yw_renumber project.
 
 Test suite for yw_renumber.pyw.
 
