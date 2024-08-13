@@ -5,6 +5,12 @@
 ## Changelog
 
 
+### v2.4.10
+
+- Reading .yw7 files created with the iOS yWriter version.
+
+Based on PyWriter v7.14.5
+
 ### v2.4.9
 
 - Make it run with old Windows versions.

@@ -16,9 +16,9 @@ The *yw-renumber* script has a graphical user interface. However, a Python 3 ins
 
 ## Download and install
 
-[Download the latest release (version 2.4.9)](https://raw.githubusercontent.com/peter88213/yw-renumber/main/dist/yw-renumber_v2.4.9.zip)
+[Download the latest release (version 2.4.10)](https://raw.githubusercontent.com/peter88213/yw-renumber/main/dist/yw-renumber_v2.4.10.zip)
 
-- Unzip the downloaded zipfile "yw-renumber_v2.4.9.zip" into a new folder.
+- Unzip the downloaded zipfile "yw-renumber_v2.4.10.zip" into a new folder.
 - Move into this new folder and launch **setup.pyw**. This installs the script for the local user.
 - Create a shortcut on the desktop when asked.
 - Open "README.md" for usage instructions.
