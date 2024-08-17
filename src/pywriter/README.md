@@ -1,6 +1,6 @@
 # This directory contains a subset of the PyWriter library
 
-Version v7.14.10
+Version v7.14.11
 
 This is a subset of the [PyWriter](https://github.com/peter88213/PyWriter) library. It contains all modules needed for this application. 
 
