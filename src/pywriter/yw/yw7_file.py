@@ -560,7 +560,7 @@ class Yw7File(Novel):
             try:
                 self.tree = ET.parse(self.filePath)
                 root = self.tree.getroot()
-            except ET.ParseError:
+            except:
                 # yw7 file may be UTF-16 encoded, with a wrong XML header (yWriter for iOS)
                 with open(self.filePath, 'r', encoding='utf-16') as f:
                     xmlText = f.read()
@@ -569,7 +569,10 @@ class Yw7File(Novel):
                 # saving memory
                 self.tree = ET.ElementTree(root)
         except:
-            return f'{ERROR}{_("Can not process file")}: "{os.path.normpath(self.filePath)}".'
+            try:
+                self.tree = ET.parse(self.filePath)
+            except Exception as ex:
+                return f'{ERROR}{_("Can not process file")}- {str(ex)}'
 
         read_project(root)
         read_locations(root)
@@ -1851,8 +1854,8 @@ class Yw7File(Novel):
         newlines = ['<?xml version="1.0" encoding="utf-8"?>']
         for line in lines:
             for tag in self._CDATA_TAGS:
-                line = re.sub(f'\<{tag}\>', f'<{tag}><![CDATA[', line)
-                line = re.sub(f'\<\/{tag}\>', f']]></{tag}>', line)
+                line = re.sub(fr'\<{tag}\>', f'<{tag}><![CDATA[', line)
+                line = re.sub(fr'\<\/{tag}\>', f']]></{tag}>', line)
             newlines.append(line)
         text = '\n'.join(newlines)
         text = text.replace('[CDATA[ \n', '[CDATA[')
